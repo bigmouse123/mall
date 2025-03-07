@@ -1,6 +1,8 @@
 package com.jiankun.mall.service;
 
 import com.jiankun.mall.pojo.Product;
+import com.jiankun.mall.pojo.query.ProductQuery;
+import com.jiankun.mall.util.PageResult;
 
 import java.util.List;
 
@@ -11,5 +13,9 @@ import java.util.List;
  */
 public interface IProductService {
 
-    List<Product> list();
+    PageResult<Product> list(ProductQuery productQuery);
+
+    void deleteById(Integer id);
+
+    void deleteAll(int[] ids);
 }

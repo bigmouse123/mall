@@ -1,6 +1,8 @@
 package com.jiankun.mall.controller;
 
+import com.jiankun.mall.pojo.query.ProductQuery;
 import com.jiankun.mall.service.IProductService;
+import com.jiankun.mall.util.PageResult;
 import com.jiankun.mall.util.Result;
 import com.jiankun.mall.pojo.Product;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +23,21 @@ public class ProductController {
     private IProductService productService;
 
     @RequestMapping("/list")
-    public Result list() {
-        List<Product> list = productService.list();
-        return Result.ok(list);
+    public PageResult<Product> list(ProductQuery productQuery) {
+        PageResult<Product> pageResult = productService.list(productQuery);
+        return pageResult;
+    }
+
+    @RequestMapping("/deleteById")
+    public Result deleteById(Integer id) {
+        productService.deleteById(id);
+        return Result.ok("删除成功");
+    }
+
+    @RequestMapping("/deleteAll")
+    public Result deleteAll(int[] ids) {
+        productService.deleteAll(ids);
+        return Result.ok("删除成功");
     }
 
 }

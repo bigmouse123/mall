@@ -192,5 +192,21 @@
         select
         <include refid="Base_Column_List"/>
         from product
+        <where>
+            <if test="name!=null and name != ''">
+                AND name LIKE CONCAT('%',#{name},'%')
+            </if>
+            <if test="beginCreateTime!=null and endCreateTime!=null">
+                AND create_time BETWEEN #{beginCreateTime} AND #{endCreateTime}
+            </if>
+        </where>
     </select>
+
+    <delete id="deleteAll">
+        delete from product
+        where id in
+        <foreach collection="array" open="(" item="id" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>

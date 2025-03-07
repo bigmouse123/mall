@@ -1,8 +1,12 @@
 package com.jiankun.mall.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.jiankun.mall.pojo.query.ProductQuery;
 import com.jiankun.mall.service.IProductService;
 import com.jiankun.mall.mapper.ProductMapper;
 import com.jiankun.mall.pojo.Product;
+import com.jiankun.mall.util.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +23,21 @@ public class ProductServiceImpl implements IProductService {
     private ProductMapper productMapper;
 
     @Override
-    public List<Product> list() {
-        return productMapper.list();
+    public PageResult<Product> list(ProductQuery productQuery) {
+        PageHelper.startPage(productQuery.getPage(), productQuery.getLimit());
+        List<Product> list = productMapper.list(productQuery);
+        PageInfo pageInfo = new PageInfo(list);
+        int count = (int) pageInfo.getTotal();
+        return new PageResult<>(0, "", count, list);
+    }
+
+    @Override
+    public void deleteById(Integer id) {
+        productMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public void deleteAll(int[] ids) {
+        productMapper.deleteAll(ids);
     }
 }
