@@ -6,7 +6,6 @@
     <script src="/static/jquery-2.1.4.js" type="text/javascript" charset="utf-8"></script>
     <script src="/static/layui/layui.js" type="text/javascript" charset="utf-8"></script>
     <script src="/static/mylayer.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/static/kindeditor/kindeditor.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
 <form class="layui-form layui-form-pane" lay-filter="formFilter" action="">
@@ -49,7 +48,7 @@
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">头像</label>
+        <label class="layui-form-label">主图</label>
         <div class="layui-input-block">
             <div class="layui-upload-list">
                 <input type="hidden" name="mainImage" id="imageId">
@@ -57,7 +56,7 @@
                 <div id="ID-upload-demo-text"></div>
             </div>
             <button type="button" class="layui-btn" id="uploadId">
-                <i class="layui-icon layui-icon-upload"></i> 头像上传
+                <i class="layui-icon layui-icon-upload"></i> 主图上传
             </button>
         </div>
     </div>
@@ -79,9 +78,12 @@
         var urlParams = new URLSearchParams(queryString);
         var id = urlParams.get("id");
         var categoryId = urlParams.get("categoryId");
+        var mainImage = urlParams.get("mainImage");
         console.log(id);
         console.log(categoryId);
+        console.log(mainImage);
 
+        //回显数据
         $.post(
             '/product/selectById',
             {'id': id, 'categoryId': categoryId},
@@ -112,7 +114,7 @@
                         'mainImage': result.data.product.mainImage
                     }
                     form.val('formFilter', formData);
-                    $('#ID-upload-demo-img').attr('src', '/pic/' + product.image);
+                    $('#ID-upload-demo-img').attr('src', product.mainImage);
 
                 }
             },
@@ -175,7 +177,7 @@
             //{"name":"UI","credit":"12"}
             // 此处可执行 Ajax 等操作
             $.post(
-                '/product/update',
+                '/product/update?oldImage=' + mainImage,
                 data.field,
                 function (result) {
                     console.log(result);

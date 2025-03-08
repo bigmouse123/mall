@@ -43,6 +43,16 @@ public class AdminServiceImpl implements IAdminService {
 
     @Override
     public void add(Admin admin) {
-        adminMapper.insert(admin);
+        adminMapper.insertSelective(admin);
+    }
+
+    @Override
+    public void update(Admin admin) {
+        adminMapper.updateByPrimaryKeySelective(admin);
+    }
+
+    @Override
+    public Admin selectById(Integer id) {
+        return adminMapper.selectByPrimaryKey(id);
     }
 }

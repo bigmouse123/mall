@@ -47,7 +47,7 @@
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">头像</label>
+        <label class="layui-form-label">主图</label>
         <div class="layui-input-block">
             <div class="layui-upload-list">
                 <input type="hidden" name="mainImage" id="imageId">
@@ -55,7 +55,7 @@
                 <div id="ID-upload-demo-text"></div>
             </div>
             <button type="button" class="layui-btn" id="uploadId">
-                <i class="layui-icon layui-icon-upload"></i> 头像上传
+                <i class="layui-icon layui-icon-upload"></i> 主图上传
             </button>
         </div>
     </div>
@@ -74,6 +74,7 @@
         var layer = layui.layer;
         var $ = layui.jquery;
 
+        //显示一级分类
         $.post(
             '/category/selectAll1',
             function (result) {
@@ -88,6 +89,7 @@
             'json'
         );
 
+        //显示当前一级分类下的二级分类
         form.on('select(parentFilter)', function (data) {
             $.post(
                 '/category/selectAll2',

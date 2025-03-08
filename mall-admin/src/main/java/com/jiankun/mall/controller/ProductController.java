@@ -7,6 +7,7 @@ import com.jiankun.mall.service.IProductService;
 import com.jiankun.mall.util.PageResult;
 import com.jiankun.mall.util.Result;
 import com.jiankun.mall.pojo.Product;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -67,8 +68,9 @@ public class ProductController {
     }
 
     @RequestMapping("/update")
-    public Result update(Product product) {
-        productService.update(product);
+    public Result update(Product product, HttpServletRequest request) {
+        String oldImage = request.getParameter("oldImage");
+        productService.update(product, oldImage);
         return Result.ok("更新成功");
     }
 

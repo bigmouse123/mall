@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org/">
 <head>
-    <title>添加</title>
+    <title>编辑</title>
     <link rel="stylesheet" href="/static/layui/css/layui.css">
     <script src="/static/jquery-2.1.4.js" type="text/javascript" charset="utf-8"></script>
     <script src="/static/layui/layui.js" type="text/javascript" charset="utf-8"></script>
     <script src="/static/mylayer.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
-<form class="layui-form layui-form-pane" action="">
+<form class="layui-form layui-form-pane" lay-filter="formFilter" action="">
+    <input type="hidden" name="id">
     <div class="layui-form-item">
         <label class="layui-form-label">管理员姓名</label>
         <div class="layui-input-block">
@@ -60,6 +61,22 @@
         var upload = layui.upload;
         var layer = layui.layer;
 
+        var queryString = window.location.search;
+        var urlParams = new URLSearchParams(queryString);
+        var id = urlParams.get("id");
+
+        $.post(
+            '/admin/selectById',
+            {'id': id},
+            function (result) {
+                if (result.code === 0) {
+                    var admin = result.data;
+                    form.val('formFilter', admin);
+                }
+            },
+            'json'
+        )
+
         // 提交事件
         form.on('submit(submitForm)', function (data) {
             var field = data.field; // 获取表单字段值
@@ -68,7 +85,7 @@
             //{"name":"UI","credit":"12"}
             // 此处可执行 Ajax 等操作
             $.post(
-                '/admin/add',
+                '/admin/update',
                 data.field,
                 function (result) {
                     console.log(result);

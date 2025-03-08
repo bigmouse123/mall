@@ -2,12 +2,14 @@ package com.jiankun.mall.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.jiankun.mall.constant.RedisConstant;
 import com.jiankun.mall.pojo.query.ProductQuery;
 import com.jiankun.mall.service.IProductService;
 import com.jiankun.mall.mapper.ProductMapper;
 import com.jiankun.mall.pojo.Product;
 import com.jiankun.mall.util.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,6 +23,9 @@ import java.util.List;
 public class ProductServiceImpl implements IProductService {
     @Autowired
     private ProductMapper productMapper;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     @Override
     public PageResult<Product> list(ProductQuery productQuery) {
@@ -44,16 +49,22 @@ public class ProductServiceImpl implements IProductService {
     @Override
     public void add(Product product) {
         productMapper.insertSelective(product);
+        redisTemplate.opsForSet().add(RedisConstant.UPLOAD_IMAGE_TO_DB, product.getMainImage());
     }
 
     @Override
     public Product selectById(Integer id) {
-        return productMapper.selectByPrimaryKey(id);
+        Product product = productMapper.selectByPrimaryKey(id);
+        redisTemplate.opsForSet().add(RedisConstant.UPLOAD_IMAGE, product.getMainImage());
+        redisTemplate.opsForSet().add(RedisConstant.UPLOAD_IMAGE_TO_DB, product.getMainImage());
+        return product;
     }
 
     @Override
-    public void update(Product product) {
+    public void update(Product product, String oldImage) {
         System.out.println(product);
         productMapper.updateByPrimaryKeySelective(product);
+        redisTemplate.opsForSet().remove(RedisConstant.UPLOAD_IMAGE_TO_DB, oldImage);
+        redisTemplate.opsForSet().add(RedisConstant.UPLOAD_IMAGE_TO_DB, product.getMainImage());
     }
 }

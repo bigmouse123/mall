@@ -18,4 +18,8 @@ public interface IAdminService {
     void deleteAll(int[] ids);
 
     void add(Admin admin);
+
+    void update(Admin admin);
+
+    Admin selectById(Integer id);
 }
