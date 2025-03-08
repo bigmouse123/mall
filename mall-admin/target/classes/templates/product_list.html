@@ -118,6 +118,7 @@
                         {type: 'checkbox', fixed: 'left'},
                         {field: 'id', title: 'ID', sort: true},
                         {field: 'name', title: '商品名称'},
+                        {field: 'categoryName', title: '分类'},
                         {field: 'price', title: '价格'},
                         {field: 'stock', title: '库存'},
                         {field: 'status', title: '状态', templet: '#statusTemplet'},
@@ -154,7 +155,7 @@
                     type: 2,
                     title: '编辑数据',
                     area: ['90%', '90%'],
-                    content: '/page/product/update?id=' + data.id
+                    content: '/page/product/update?id=' + data.id + '&categoryId=' + data.categoryId
                 });
             } else if (obj.event === 'deleteById') {
                 layer.confirm('您确认要删除么?', function () {

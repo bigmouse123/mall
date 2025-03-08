@@ -40,4 +40,9 @@ public class AdminServiceImpl implements IAdminService {
     public void deleteAll(int[] ids) {
         adminMapper.deleteAll(ids);
     }
+
+    @Override
+    public void add(Admin admin) {
+        adminMapper.insert(admin);
+    }
 }

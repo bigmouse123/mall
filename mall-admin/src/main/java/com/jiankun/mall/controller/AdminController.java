@@ -36,4 +36,10 @@ public class AdminController {
         adminService.deleteAll(ids);
         return Result.ok("删除成功");
     }
+
+    @RequestMapping("/add")
+    public Result add(Admin admin) {
+        adminService.add(admin);
+        return Result.ok("添加成功");
+    }
 }

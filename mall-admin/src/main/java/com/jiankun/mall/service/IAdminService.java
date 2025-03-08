@@ -16,4 +16,6 @@ public interface IAdminService {
     void deleteById(Integer id);
 
     void deleteAll(int[] ids);
+
+    void add(Admin admin);
 }

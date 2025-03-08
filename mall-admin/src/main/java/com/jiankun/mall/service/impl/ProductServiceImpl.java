@@ -40,4 +40,20 @@ public class ProductServiceImpl implements IProductService {
     public void deleteAll(int[] ids) {
         productMapper.deleteAll(ids);
     }
+
+    @Override
+    public void add(Product product) {
+        productMapper.insertSelective(product);
+    }
+
+    @Override
+    public Product selectById(Integer id) {
+        return productMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public void update(Product product) {
+        System.out.println(product);
+        productMapper.updateByPrimaryKeySelective(product);
+    }
 }
