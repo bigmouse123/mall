@@ -55,4 +55,14 @@ public class AdminServiceImpl implements IAdminService {
     public Admin selectById(Integer id) {
         return adminMapper.selectByPrimaryKey(id);
     }
+
+    @Override
+    public void updateStatus(Integer id, Integer status) {
+        adminMapper.updateStatus(id, status);
+    }
+
+    @Override
+    public Admin login(String name, String password) {
+        return adminMapper.login(name, password);
+    }
 }

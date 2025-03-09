@@ -1,6 +1,7 @@
 package com.jiankun.mall.config;
 
 import com.jiankun.mall.converter.String2DateConverter;
+import com.jiankun.mall.interceptor.LoginInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -28,10 +29,12 @@ public class WebConfigurer implements WebMvcConfigurer {
         WebMvcConfigurer.super.addResourceHandlers(registry);
     }
 
-    /*@Override
+    @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LoginInterceptor())
                 .addPathPatterns("/**")
-                .excludePathPatterns("/page/login", "/admin/login", "/admin/logout", "/static/**");
-    }*/
+                .excludePathPatterns("/page/login", "/admin/login",
+                        "/admin/logout", "/static/**", "/verifyCode",
+                        "/admin/register", "/page/register", "/verifyCode/**", "/error");
+    }
 }

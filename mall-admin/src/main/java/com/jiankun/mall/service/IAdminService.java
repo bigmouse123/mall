@@ -22,4 +22,8 @@ public interface IAdminService {
     void update(Admin admin);
 
     Admin selectById(Integer id);
+
+    void updateStatus(Integer id, Integer status);
+
+    Admin login(String name, String password);
 }

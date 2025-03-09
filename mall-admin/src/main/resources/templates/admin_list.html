@@ -58,9 +58,9 @@
     </div>
 </script>
 
-<script type="text/html" id="imageTemplet">
-    <img src="/pic/{{d.image}}">
-</script>
+<!--<script type="text/html" id="imageTemplet">-->
+<!--    <img src="/pic/{{d.image}}">-->
+<!--</script>-->
 
 <script type="text/html" id="statusTemplet">
     <input type="checkbox" name="status" value="{{= d.id }}" lay-text="激活|失效" lay-skin="switch"
@@ -125,7 +125,7 @@
                         {field: 'role', title: '角色'},
                         {field: 'email', title: '邮箱'},
                         {field: 'phone', title: '电话'},
-                        {field: 'image', title: '封面', templet: '#imageTemplet'},
+                        // {field: 'image', title: '封面', templet: '#imageTemplet'},
                         {field: 'status', title: '状态', templet: '#statusTemplet'},
                         {field: 'createTime', title: '创建时间'},
                         {fixed: 'right', title: '操作', width: 134, minWidth: 125, templet: '#toolDemo'}

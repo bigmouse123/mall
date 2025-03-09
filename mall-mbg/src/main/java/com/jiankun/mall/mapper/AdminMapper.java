@@ -21,4 +21,8 @@ public interface AdminMapper {
     List<Admin> list(AdminQuery adminQuerys);
 
     void deleteAll(int[] ids);
+
+    void updateStatus(Integer id, Integer status);
+
+    Admin login(String name, String password);
 }

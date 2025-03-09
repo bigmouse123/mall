@@ -5,6 +5,7 @@ import com.jiankun.mall.pojo.query.AdminQuery;
 import com.jiankun.mall.service.IAdminService;
 import com.jiankun.mall.util.PageResult;
 import com.jiankun.mall.util.Result;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -54,5 +55,33 @@ public class AdminController {
     public Result update(Admin admin) {
         adminService.update(admin);
         return Result.ok("更新成功");
+    }
+
+    @RequestMapping("/updateStatus")
+    public Result updateStatus(Integer id, Integer status) {
+        adminService.updateStatus(id, status);
+        return Result.ok();
+    }
+
+    @RequestMapping("/login")
+    public Result login(String name, String password, String code, HttpSession session) {
+        Admin admin = adminService.login(name, password);
+        String codeInSession = (String) session.getAttribute("codeInSession");
+        if (!codeInSession.equals(code)) {
+            return Result.error("验证码错误");
+        }
+        if (admin == null) {
+            return Result.error("用户名或密码错误");
+        }
+        if (admin.getStatus() == 0) {
+            return Result.error("该用户被封禁");
+        }
+        session.setAttribute("admin", admin);
+        return Result.ok("登录成功");
+    }
+
+    @RequestMapping("/register")
+    public Result register(Admin admin) {
+        return Result.ok("注册成功");
     }
 }

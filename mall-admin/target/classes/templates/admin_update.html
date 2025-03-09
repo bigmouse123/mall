@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <title>编辑</title>
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
+    <script src="/static/jquery-2.1.4.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/static/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/static/mylayer.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<form class="layui-form layui-form-pane" lay-filter="formFilter" action="">
+    <input type="hidden" name="id">
+    <div class="layui-form-item">
+        <label class="layui-form-label">管理员姓名</label>
+        <div class="layui-input-block">
+            <input type="text" name="name" autocomplete="off" placeholder="请输入" lay-verify="required"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">密码</label>
+        <div class="layui-input-block">
+            <input type="text" name="password" autocomplete="off" placeholder="请输入" lay-verify="required"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">角色</label>
+        <div class="layui-input-block">
+            <select name="role" lay-filter="aihao">
+                <option value="1">超级管理员</option>
+                <option value="2">普通管理员</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">电话</label>
+        <div class="layui-input-block">
+            <input type="text" name="phone" autocomplete="off" placeholder="请输入" lay-verify="required"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">邮箱</label>
+        <div class="layui-input-block">
+            <input type="text" name="email" autocomplete="off" placeholder="请输入" lay-verify="required"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button type="submit" class="layui-btn" lay-submit lay-filter="submitForm">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+<script>
+
+    layui.use(['form', 'layer'], function () {
+        var form = layui.form;
+        var upload = layui.upload;
+        var layer = layui.layer;
+
+        var queryString = window.location.search;
+        var urlParams = new URLSearchParams(queryString);
+        var id = urlParams.get("id");
+
+        $.post(
+            '/admin/selectById',
+            {'id': id},
+            function (result) {
+                if (result.code === 0) {
+                    var admin = result.data;
+                    form.val('formFilter', admin);
+                }
+            },
+            'json'
+        )
+
+        // 提交事件
+        form.on('submit(submitForm)', function (data) {
+            var field = data.field; // 获取表单字段值
+            console.log(field);
+            console.log(data.field);
+            //{"name":"UI","credit":"12"}
+            // 此处可执行 Ajax 等操作
+            $.post(
+                '/admin/update',
+                data.field,
+                function (result) {
+                    console.log(result);
+                    if (result.code == 0) {
+                        mylayer.okMsg(result.msg);
+                        //table.reload('tableId');
+                        setInterval(function () {
+                            //关闭弹出层
+                            var index = parent.layer.getFrameIndex(window.name);
+                            parent.layer.close(index);
+                            //刷新父页面
+                            window.parent.location.reload();
+                        }, 2000);
+                    }
+                },
+                'json'
+            );
+            return false; // 阻止默认 form 跳转
+        });
+    });
+</script>
+</body>
+</html>
