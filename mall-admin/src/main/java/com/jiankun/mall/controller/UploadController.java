@@ -21,6 +21,8 @@ import java.util.UUID;
 public class UploadController {
     @Autowired
     private RedisTemplate redisTemplate;
+    @Autowired
+    private AliOSSUtil aliOSSUtil;
 
     @RequestMapping("/upload")
     @ResponseBody
@@ -41,7 +43,7 @@ public class UploadController {
         //2.阿里云上传
         String url = "";
         try {
-            url = AliOSSUtil.uploadFile(newFileName, file.getInputStream());
+            url = aliOSSUtil.uploadFile(newFileName, file.getInputStream());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -6,6 +6,7 @@
     <script src="/static/jquery-2.1.4.js" type="text/javascript" charset="utf-8"></script>
     <script src="/static/layui/layui.js" type="text/javascript" charset="utf-8"></script>
     <script src="/static/mylayer.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/static/kindeditor/kindeditor.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
 <form class="layui-form layui-form-pane" lay-filter="formFilter" action="">
@@ -46,6 +47,12 @@
         </div>
     </div>
     <div class="layui-form-item">
+        <label class="layui-form-label">详情</label>
+        <div class="layui-input-block">
+            <textarea id="detailId" name="detail" placeholder="请输入内容" class="layui-textarea"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item">
         <label class="layui-form-label">主图</label>
         <div class="layui-input-block">
             <div class="layui-upload-list">
@@ -81,6 +88,13 @@
         console.log(categoryId);
         console.log(mainImage);
 
+        var kindEditorParams = {
+            afterBlur: function () {
+                this.sync();
+            }
+        };
+        var editor = KindEditor.create('#detailId', kindEditorParams);
+
         //回显数据
         $.post(
             '/product/selectById',
@@ -109,11 +123,14 @@
                         'categoryId': result.data.product.categoryId,
                         'price': result.data.product.price,
                         'stock': result.data.product.stock,
+                        'detail': result.data.product.detail,
                         'mainImage': result.data.product.mainImage
                     }
                     form.val('formFilter', formData);
                     $('#ID-upload-demo-img').attr('src', product.mainImage);
 
+                    // 设置编辑器内容
+                    editor.html(product.detail);
                 }
             },
             'json'

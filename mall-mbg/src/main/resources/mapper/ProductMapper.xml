@@ -217,7 +217,7 @@
         on p.category_id = c.id
         <where>
             <if test="name!=null and name != ''">
-                AND name LIKE CONCAT('%',#{name},'%')
+                AND p.name LIKE CONCAT('%',#{name},'%')
             </if>
             <if test="parentId != null and parentId != ''">
                 AND parent_id = #{parentId}

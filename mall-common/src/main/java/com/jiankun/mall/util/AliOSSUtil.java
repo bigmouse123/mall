@@ -7,6 +7,7 @@ import com.aliyun.oss.OSSException;
 import com.aliyun.oss.model.PutObjectRequest;
 import com.aliyun.oss.model.PutObjectResult;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.io.InputStream;
 
@@ -15,20 +16,21 @@ import java.io.InputStream;
  * @version 1.0
  * @date 2025/3/6 13:50
  */
+@Component
 public class AliOSSUtil {
     // Endpoint以华东1（杭州）为例，其它Region请按实际情况填写。
     private static final String ENDPOINT = "https://oss-cn-beijing.aliyuncs.com";
     // 从环境变量中获取访问凭证。运行本代码示例之前，请确保已设置环境变量OSS_ACCESS_KEY_ID和OSS_ACCESS_KEY_SECRET。
     //EnvironmentVariableCredentialsProvider credentialsProvider = CredentialsProviderFactory.newEnvironmentVariableCredentialsProvider();
     @Value("${aliyun.accessKeyId}")
-    private static String ACCESS_KEY_ID;
+    private String ACCESS_KEY_ID;
     @Value("${aliyun.accessKeySecret}")
-    private static String ACCESS_KEY_SECRET;
+    private String ACCESS_KEY_SECRET;
     // 填写Bucket名称，例如examplebucket。
     @Value("${aliyun.bucketname}")
-    private static String BUCKET_NAME;
+    private String BUCKET_NAME;
 
-    public static String uploadFile(String objectName, InputStream inputStream) throws Exception {
+    public String uploadFile(String objectName, InputStream inputStream) throws Exception {
         // 创建OSSClient实例。
         OSS ossClient = new OSSClientBuilder().build(ENDPOINT, ACCESS_KEY_ID, ACCESS_KEY_SECRET);
 
@@ -62,7 +64,7 @@ public class AliOSSUtil {
         return url;
     }
 
-    public static void deleteFile(String url) {
+    public void deleteFile(String url) {
         // 创建OSSClient实例。
         OSS ossClient = new OSSClientBuilder().build(ENDPOINT, ACCESS_KEY_ID, ACCESS_KEY_SECRET);
         try {

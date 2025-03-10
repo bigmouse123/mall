@@ -19,6 +19,8 @@ import java.util.Set;
 public class DeleteImageJob {
     @Autowired
     private RedisTemplate redisTemplate;
+    @Autowired
+    private AliOSSUtil aliOSSUtil;
 
     @Scheduled(cron = "0 */2 * * * *")
     public void deleteImage() {
@@ -26,7 +28,7 @@ public class DeleteImageJob {
         Set<String> set = redisTemplate.opsForSet().difference(RedisConstant.UPLOAD_IMAGE, RedisConstant.UPLOAD_IMAGE_TO_DB);
         if (!CollectionUtils.isEmpty(set)) {
             for (String image : set) {
-                AliOSSUtil.deleteFile(image);
+                aliOSSUtil.deleteFile(image);
                 System.out.println("删除:" + image);
             }
             redisTemplate.delete(RedisConstant.UPLOAD_IMAGE);
