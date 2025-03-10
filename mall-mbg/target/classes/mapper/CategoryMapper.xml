@@ -133,4 +133,33 @@
         from category
         where id = #{categoryId}
     </select>
+    <resultMap id="CategoryMap" type="com.jiankun.mall.pojo.vo.CategoryVO">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="parent_id" jdbcType="INTEGER" property="parentId"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="is_deleted" jdbcType="TINYINT" property="isDeleted"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <association property="parent" javaType="com.jiankun.mall.pojo.Category">
+            <result property="name" column="parentName" jdbcType="VARCHAR"/>
+        </association>
+    </resultMap>
+    <select id="list" resultMap="CategoryMap">
+        select c1.id, c1.parent_id,c2.`name` as parentName, c1.`name`,
+        c1.`status`, c1.is_deleted, c1.create_time, c1.update_time
+        from category c1 inner join category c2
+        on c1.parent_id = c2.id
+        <where>
+            <if test="parentId!=null">
+                AND c2.id = #{parentId}
+            </if>
+            <if test="id!=null">
+                AND c1.id = #{id}
+            </if>
+            <if test="beginCreateTime!=null and endCreateTime!=null">
+                AND c1.create_time BETWEEN #{beginCreateTime} AND #{endCreateTime}
+            </if>
+        </where>
+    </select>
 </mapper>

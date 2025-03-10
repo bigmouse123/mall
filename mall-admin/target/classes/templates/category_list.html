@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org/">
 <head>
-    <title>博客管理</title>
+    <title>分类管理</title>
     <link rel="stylesheet" href="/static/layui/css/layui.css">
 </head>
 <body>
@@ -10,16 +10,16 @@
 <script src="/static/mylayer.js" type="text/javascript" charset="utf-8"></script>
 
 <form class="layui-form">
-    管理员名：
+    一级分类:
     <div class="layui-inline">
-        <input type="text" name="name" class="layui-input" lay-affix="clear">
+        <select id="parentId" name="parentId" lay-filter="parentFilter">
+            <option value=""></option>
+        </select>
     </div>
-    管理员类型:
+    二级分类:
     <div class="layui-inline">
-        <select name="role">
-            <option value="">--请选择--</option>
-            <option value="1">超级管理员</option>
-            <option value="2">普通管理员</option>
+        <select id="id" name="id">
+            <option value=""></option>
         </select>
     </div>
     创建开始时间:
@@ -86,6 +86,41 @@
             type: 'datetime'
         });
 
+        //显示一级分类
+        $.post(
+            '/category/selectAll1',
+            function (result) {
+                if (result.code === 0) {
+                    var list = result.data;
+                    $(list).each(function () {
+                        $('#parentId').append('<option value="' + this.id + '">' + this.name + '</option>')
+                    })
+                }
+                form.render('select');
+            },
+            'json'
+        );
+
+        //显示当前一级分类下的二级分类
+        form.on('select(parentFilter)', function (data) {
+            $.post(
+                '/category/selectAll2',
+                {'id': data.value},
+                function (result) {
+                    console.log(result);
+                    $('#id option:gt(0)').remove();
+                    if (result.code === 0) {
+                        var list = result.data;
+                        $(list).each(function () {
+                            $('#id').append('<option value="' + this.id + '">' + this.name + '</option>')
+                        })
+                    }
+                    form.render('select');
+                },
+                'json'
+            )
+        })
+
         // 状态 - 开关操作
         form.on('switch(statusFilter)', function (obj) {
             var id = this.value;
@@ -114,18 +149,15 @@
 
         table.render({
             elem: '#tableId'
-            , url: '/admin/list'
+            , url: '/category/list'
             , toolbar: '#toolbarDemo'
             , cols:
                 [
                     [
                         {type: 'checkbox', fixed: 'left'},
                         {field: 'id', title: 'ID', sort: true},
-                        {field: 'name', title: '管理员姓名'},
-                        {field: 'role', title: '角色'},
-                        {field: 'email', title: '邮箱'},
-                        {field: 'phone', title: '电话'},
-                        // {field: 'image', title: '封面', templet: '#imageTemplet'},
+                        {field: 'parentName', title: '一级分类'},
+                        {field: 'name', title: '二级分类'},
                         {field: 'status', title: '状态', templet: '#statusTemplet'},
                         {field: 'createTime', title: '创建时间'},
                         {field: 'updateTime', title: '更新时间'},

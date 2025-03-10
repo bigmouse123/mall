@@ -1,8 +1,12 @@
 package com.jiankun.mall.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.jiankun.mall.mapper.CategoryMapper;
 import com.jiankun.mall.pojo.Category;
+import com.jiankun.mall.pojo.query.CategoryQuery;
 import com.jiankun.mall.service.ICategoryService;
+import com.jiankun.mall.util.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,5 +40,14 @@ public class CategoryServiceImpl implements ICategoryService {
     @Override
     public Integer selectParentIdByCategoryId(Integer categoryId) {
         return categoryMapper.selectParentIdByCategoryId(categoryId);
+    }
+
+    @Override
+    public PageResult<Category> list(CategoryQuery categotyQuery) {
+        PageHelper.startPage(categotyQuery.getPage(), categotyQuery.getLimit());
+        List<Category> list = categoryMapper.list(categotyQuery);
+        PageInfo<Category> pageInfo = new PageInfo<>(list);
+        int count = (int) pageInfo.getTotal();
+        return new PageResult<>(0, "", count, list);
     }
 }

@@ -1,6 +1,7 @@
 package com.jiankun.mall.mapper;
 
 import com.jiankun.mall.pojo.Category;
+import com.jiankun.mall.pojo.query.CategoryQuery;
 
 import java.util.List;
 
@@ -24,4 +25,6 @@ public interface CategoryMapper {
     List<Category> selectAll2(Integer id);
 
     Integer selectParentIdByCategoryId(Integer categoryId);
+
+    List<Category> list(CategoryQuery categoryQuery);
 }

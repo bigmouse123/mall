@@ -219,8 +219,7 @@
             <if test="name!=null and name != ''">
                 AND name LIKE CONCAT('%',#{name},'%')
             </if>
-            <if test="parentId != null and parentId != ''
-            and (categoryId == null or categoryId == '')">
+            <if test="parentId != null and parentId != ''">
                 AND parent_id = #{parentId}
             </if>
             <if test="categoryId != null and categoryId != ''">

@@ -1,6 +1,8 @@
 package com.jiankun.mall.service;
 
 import com.jiankun.mall.pojo.Category;
+import com.jiankun.mall.pojo.query.CategoryQuery;
+import com.jiankun.mall.util.PageResult;
 
 import java.util.List;
 
@@ -17,4 +19,6 @@ public interface ICategoryService {
     List<Category> selectAll2(Integer id);
 
     Integer selectParentIdByCategoryId(Integer categoryId);
+
+    PageResult<Category> list(CategoryQuery categoryQuery);
 }
