@@ -26,4 +26,6 @@ public interface IAdminService {
     void updateStatus(Integer id, Integer status);
 
     Admin login(String name, String password);
+
+    Boolean register(Admin admin);
 }

@@ -25,4 +25,6 @@ public interface AdminMapper {
     void updateStatus(Integer id, Integer status);
 
     Admin login(String name, String password);
+
+    int register(Admin admin);
 }

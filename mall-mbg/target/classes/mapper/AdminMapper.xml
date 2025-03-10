@@ -172,6 +172,12 @@
           AND password = #{password}
     </select>
 
+    <select id="register" resultType="java.lang.Integer">
+        select count(*)
+        from admin
+        where name = #{name}
+    </select>
+
     <delete id="deleteAll">
         delete from admin
         where id in

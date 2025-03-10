@@ -65,4 +65,10 @@ public class AdminServiceImpl implements IAdminService {
     public Admin login(String name, String password) {
         return adminMapper.login(name, password);
     }
+
+    @Override
+    public Boolean register(Admin admin) {
+        System.out.println(adminMapper.register(admin));
+        return adminMapper.register(admin) > 0;
+    }
 }

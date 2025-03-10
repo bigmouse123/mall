@@ -82,6 +82,12 @@ public class AdminController {
 
     @RequestMapping("/register")
     public Result register(Admin admin) {
-        return Result.ok("注册成功");
+        Boolean isRepeat = adminService.register(admin);
+        if (isRepeat) {
+            return Result.error("该用户名已存在");
+        } else {
+            adminService.add(admin);
+            return Result.ok("注册成功");
+        }
     }
 }
