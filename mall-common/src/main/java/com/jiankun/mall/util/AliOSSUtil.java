@@ -6,6 +6,7 @@ import com.aliyun.oss.OSSClientBuilder;
 import com.aliyun.oss.OSSException;
 import com.aliyun.oss.model.PutObjectRequest;
 import com.aliyun.oss.model.PutObjectResult;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.io.InputStream;
 
@@ -19,10 +20,13 @@ public class AliOSSUtil {
     private static final String ENDPOINT = "https://oss-cn-beijing.aliyuncs.com";
     // 从环境变量中获取访问凭证。运行本代码示例之前，请确保已设置环境变量OSS_ACCESS_KEY_ID和OSS_ACCESS_KEY_SECRET。
     //EnvironmentVariableCredentialsProvider credentialsProvider = CredentialsProviderFactory.newEnvironmentVariableCredentialsProvider();
-    private static final String ACCESS_KEY_ID = "LTAI5t99uit8dsP5CsdoCPCQ";
-    private static final String ACCESS_KEY_SECRET = "Cz110Vi5Nmz9uneqCua5fDPGk8r6Ag";
+    @Value("${aliyun.accessKeyId}")
+    private static String ACCESS_KEY_ID;
+    @Value("${aliyun.accessKeySecret}")
+    private static String ACCESS_KEY_SECRET;
     // 填写Bucket名称，例如examplebucket。
-    private static final String BUCKET_NAME = "mall-ljk";
+    @Value("${aliyun.bucketname}")
+    private static String BUCKET_NAME;
 
     public static String uploadFile(String objectName, InputStream inputStream) throws Exception {
         // 创建OSSClient实例。

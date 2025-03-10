@@ -190,7 +190,7 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
 
-    <resultMap id="ProductResultMap" type="com.jiankun.mall.pojo.Product">
+    <resultMap id="ProductResultMap" type="com.jiankun.mall.pojo.vo.ProductVO">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="category_id" jdbcType="INTEGER" property="categoryId"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
@@ -212,12 +212,19 @@
         select
         p.id
         , category_id, p.`name`, c.name as categoryName, subtitle, main_image, sub_images, detail, price, stock,
-        p.`status`, p.is_deleted, p.create_time, p.update_time
+        p.`status`, p.is_deleted, p.create_time, p.update_time, parent_id
         from product as p inner join category as c
         on p.category_id = c.id
         <where>
             <if test="name!=null and name != ''">
                 AND name LIKE CONCAT('%',#{name},'%')
+            </if>
+            <if test="parentId != null and parentId != ''
+            and (categoryId == null or categoryId == '')">
+                AND parent_id = #{parentId}
+            </if>
+            <if test="categoryId != null and categoryId != ''">
+                AND category_id = #{categoryId}
             </if>
             <if test="beginCreateTime!=null and endCreateTime!=null">
                 AND create_time BETWEEN #{beginCreateTime} AND #{endCreateTime}
@@ -232,4 +239,10 @@
             #{id}
         </foreach>
     </delete>
+
+    <update id="updateStatus">
+        update product
+        set status = #{status}
+        where id = #{id}
+    </update>
 </mapper>
