@@ -14,9 +14,17 @@
     <div class="layui-inline">
         <input type="text" name="name" class="layui-input" lay-affix="clear">
     </div>
-    分类:
+    一级分类:
     <div class="layui-inline">
-
+        <select id="parentId" name="parentId" lay-filter="parentFilter">
+            <option value=""></option>
+        </select>
+    </div>
+    二级分类:
+    <div class="layui-inline">
+        <select id="categoryId" name="categoryId">
+            <option value=""></option>
+        </select>
     </div>
     创建开始时间:
     <div class="layui-inline">
@@ -81,6 +89,41 @@
             elem: '#endCreateTime',
             type: 'datetime'
         });
+
+        //显示一级分类
+        $.post(
+            '/category/selectAll1',
+            function (result) {
+                if (result.code === 0) {
+                    var list = result.data;
+                    $(list).each(function () {
+                        $('#parentId').append('<option value="' + this.id + '">' + this.name + '</option>')
+                    })
+                }
+                form.render('select');
+            },
+            'json'
+        );
+
+        //显示当前一级分类下的二级分类
+        form.on('select(parentFilter)', function (data) {
+            $.post(
+                '/category/selectAll2',
+                {'id': data.value},
+                function (result) {
+                    console.log(result);
+                    $('#categoryId option:gt(0)').remove();
+                    if (result.code === 0) {
+                        var list = result.data;
+                        $(list).each(function () {
+                            $('#categoryId').append('<option value="' + this.id + '">' + this.name + '</option>')
+                        })
+                    }
+                    form.render('select');
+                },
+                'json'
+            )
+        })
 
         // 状态 - 开关操作
         form.on('switch(statusFilter)', function (obj) {

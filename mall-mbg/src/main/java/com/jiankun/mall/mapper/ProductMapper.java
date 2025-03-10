@@ -21,4 +21,6 @@ public interface ProductMapper {
     List<Product> list(ProductQuery productQuery);
 
     void deleteAll(int[] ids);
+
+    void updateStatus(Integer id, Integer status);
 }

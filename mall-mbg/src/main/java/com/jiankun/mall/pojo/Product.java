@@ -9,8 +9,6 @@ public class Product implements Serializable {
 
     private Integer categoryId;
 
-    private String categoryName;
-
     private String name;
 
     private String subtitle;
@@ -33,8 +31,6 @@ public class Product implements Serializable {
 
     private Date updateTime;
 
-    private Category category;
-
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -51,13 +47,6 @@ public class Product implements Serializable {
 
     public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
-    }
-
-    public String getCategoryName() {
-        if (category == null) {
-            return null;
-        }
-        return category.getName();
     }
 
     public String getName() {
@@ -148,14 +137,6 @@ public class Product implements Serializable {
         this.updateTime = updateTime;
     }
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -164,7 +145,6 @@ public class Product implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", categoryId=").append(categoryId);
-        sb.append(", categoryName=").append(this.getCategoryName());
         sb.append(", name=").append(name);
         sb.append(", subtitle=").append(subtitle);
         sb.append(", mainImage=").append(mainImage);

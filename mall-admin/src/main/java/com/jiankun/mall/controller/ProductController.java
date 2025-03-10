@@ -74,4 +74,10 @@ public class ProductController {
         return Result.ok("更新成功");
     }
 
+    @RequestMapping("/updateStatus")
+    public Result updateStatus(Integer id, Integer status) {
+        productService.updateStatus(id, status);
+        return Result.ok();
+    }
+
 }

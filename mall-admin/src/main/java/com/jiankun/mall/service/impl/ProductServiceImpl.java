@@ -67,4 +67,9 @@ public class ProductServiceImpl implements IProductService {
         redisTemplate.opsForSet().remove(RedisConstant.UPLOAD_IMAGE_TO_DB, oldImage);
         redisTemplate.opsForSet().add(RedisConstant.UPLOAD_IMAGE_TO_DB, product.getMainImage());
     }
+
+    @Override
+    public void updateStatus(Integer id, Integer status) {
+        productMapper.updateStatus(id, status);
+    }
 }

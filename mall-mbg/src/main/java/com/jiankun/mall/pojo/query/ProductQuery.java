@@ -14,6 +14,8 @@ public class ProductQuery {
     private Integer page;
     private Integer limit;
     private String name;
+    private String parentId;
+    private String categoryId;
     private Date beginCreateTime;
     private Date endCreateTime;
 }

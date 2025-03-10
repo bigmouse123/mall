@@ -22,4 +22,6 @@ public interface IProductService {
     Product selectById(Integer id);
 
     void update(Product product, String oldImage);
+
+    void updateStatus(Integer id, Integer status);
 }
