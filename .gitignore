@@ -3,6 +3,7 @@ out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 *.class
+application.properties
 
 ### Eclipse ###
 .apt_generated
@@ -28,5 +29,3 @@ bin/
 
 ### Mac OS ###
 .DS_Store
-
-application.properties
