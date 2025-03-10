@@ -80,6 +80,12 @@ public class AdminController {
         return Result.ok("登录成功");
     }
 
+    @RequestMapping("/logout")
+    public Result logout(HttpSession session) {
+        session.removeAttribute("admin");
+        return Result.ok("退出成功");
+    }
+
     @RequestMapping("/register")
     public Result register(Admin admin) {
         Boolean isRepeat = adminService.register(admin);
@@ -89,5 +95,16 @@ public class AdminController {
             adminService.add(admin);
             return Result.ok("注册成功");
         }
+    }
+
+    @RequestMapping("/updatePassword")
+    public Result updatePassword(String oldPassword, String newPassword, HttpSession session) {
+        Admin admin = (Admin) session.getAttribute("admin");
+        if (!oldPassword.equals(admin.getPassword())) {
+            return Result.error("密码错误");
+        }
+        admin.setPassword(newPassword);
+        adminService.update(admin);
+        return Result.ok("修改成功");
     }
 }

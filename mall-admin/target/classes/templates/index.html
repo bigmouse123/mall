@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <title>主页</title>
     <link rel="stylesheet" type="text/css" href="/static/layui/css/layui.css"/>
@@ -10,11 +10,12 @@
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
         <div class="layui-logo">JAVA-0000</div>
-        <ul class="layui-nav layui-layout-left">   </ul>
+        <ul class="layui-nav layui-layout-left"></ul>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <a href="javascript:;">
                     <img width="40px" height="30px" src="/pic/${admin.image}"/>
+                    <span th:text="${session.admin.name}"></span>
                 </a>
                 <dl class="layui-nav-child">
                     <dd>
@@ -36,7 +37,7 @@
     <div class="layui-side layui-bg-black">
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-            <ul class="layui-nav layui-nav-tree" >
+            <ul class="layui-nav layui-nav-tree">
                 <li class="layui-nav-item layui-nav-itemed">
                     <a href="javascript:;">信息维护</a>
                     <dl class="layui-nav-child">
@@ -45,7 +46,8 @@
                                data-url="/page/admin/list"
                                class="site-demo-active">管理员管理</a>
                         </dd>
-                        <dd><dd>
+                        <dd>
+                        <dd>
                             <a href="javascript:;"
                                data-url="/page/product/list"
                                class="site-demo-active">商品管理</a>
@@ -90,11 +92,11 @@
     var $ = layui.jquery;
     var layer = layui.layer;
     var element = layui.element;
-    $('.site-demo-active').click(function() {
+    $('.site-demo-active').click(function () {
         window.open($(this).data('url'), "rightframe");
     });
     element.render();// element.init();
-    function openURL(url){
+    function openURL(url) {
         window.open(url, "rightframe");
     }
 
@@ -110,6 +112,10 @@
                 'json'
             );
         })
+    }
+
+    function openPass() {
+        location.href = "/page/password/update"
     }
 
 </script>
