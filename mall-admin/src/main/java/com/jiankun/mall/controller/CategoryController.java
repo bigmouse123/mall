@@ -46,4 +46,22 @@ public class CategoryController {
         PageResult<Category> pageResult = categoryService.list(categoryQuery);
         return pageResult;
     }
+
+    @RequestMapping("/add")
+    public Result add(Category category) {
+        categoryService.add(category);
+        return Result.ok("添加成功");
+    }
+
+    @RequestMapping("/deleteById")
+    public Result deleteById(Integer id) {
+        categoryService.deleteById(id);
+        return Result.ok("删除成功");
+    }
+
+    @RequestMapping("/deleteAll")
+    public Result deleteAll(int[] ids) {
+        categoryService.deleteAll(ids);
+        return Result.ok("删除成功");
+    }
 }

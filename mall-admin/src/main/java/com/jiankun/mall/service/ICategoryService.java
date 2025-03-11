@@ -21,4 +21,10 @@ public interface ICategoryService {
     Integer selectParentIdByCategoryId(Integer categoryId);
 
     PageResult<Category> list(CategoryQuery categoryQuery);
+
+    void add(Category category);
+
+    void deleteById(Integer id);
+
+    void deleteAll(int[] ids);
 }

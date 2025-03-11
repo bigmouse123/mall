@@ -156,8 +156,8 @@
                     [
                         {type: 'checkbox', fixed: 'left'},
                         {field: 'id', title: 'ID', sort: true},
-                        {field: 'parentName', title: '一级分类'},
-                        {field: 'name', title: '二级分类'},
+                        {field: 'parentName', title: '上级分类'},
+                        {field: 'name', title: '分类名'},
                         {field: 'status', title: '状态', templet: '#statusTemplet'},
                         {field: 'createTime', title: '创建时间'},
                         {field: 'updateTime', title: '更新时间'},
@@ -191,12 +191,12 @@
                     type: 2,
                     title: '编辑数据',
                     area: ['90%', '90%'],
-                    content: '/page/admin/update?id=' + data.id
+                    content: '/page/category/update?id=' + data.id
                 });
             } else if (obj.event === 'deleteById') {
                 layer.confirm('您确认要删除么?', function () {
                     $.post(
-                        '/admin/deleteById',
+                        '/category/deleteById',
                         {'id': data.id},
                         function (result) {
                             console.log(result);
@@ -237,7 +237,7 @@
                         type: 2,
                         title: '添加数据',
                         area: ['90%', '90%'],
-                        content: '/page/admin/add'
+                        content: '/page/category/add'
                     });
                     break;
                 case 'deleteAll':
@@ -248,7 +248,7 @@
                     });
                     layer.confirm('您确认要删除么?', function () {
                         $.post(
-                            '/admin/deleteAll',
+                            '/category/deleteAll',
                             {'ids': ids},
                             function (result) {
                                 console.log(result);

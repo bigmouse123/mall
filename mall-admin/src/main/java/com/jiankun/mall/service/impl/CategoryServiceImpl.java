@@ -50,4 +50,19 @@ public class CategoryServiceImpl implements ICategoryService {
         int count = (int) pageInfo.getTotal();
         return new PageResult<>(0, "", count, list);
     }
+
+    @Override
+    public void add(Category category) {
+        categoryMapper.insertSelective(category);
+    }
+
+    @Override
+    public void deleteById(Integer id) {
+        categoryMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public void deleteAll(int[] ids) {
+        categoryMapper.deleteAll(ids);
+    }
 }
