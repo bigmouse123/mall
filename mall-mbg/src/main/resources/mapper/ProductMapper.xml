@@ -244,4 +244,13 @@
         set status = #{status}
         where id = #{id}
     </update>
+
+    <select id="count" resultType="com.jiankun.mall.pojo.vo.CategoryCountVO">
+        select c.name as name, count(*) as value
+        from product as p inner join category as c
+        on p.category_id = c.id
+        group by p.category_id
+    </select>
+
+
 </mapper>
