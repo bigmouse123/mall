@@ -3,9 +3,12 @@ package com.jiankun.mall.service.impl;
 import com.jiankun.mall.controller.CartController;
 import com.jiankun.mall.mapper.CartMapper;
 import com.jiankun.mall.pojo.Cart;
+import com.jiankun.mall.pojo.vo.CartVO;
 import com.jiankun.mall.service.ICartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author OfferKing
@@ -19,6 +22,16 @@ public class CartServiceImpl implements ICartService {
 
     @Override
     public void add(Cart cart) {
-        cartMapper.insertSelective(cart);
+        int count = cartMapper.selectCountByUserIdAndProductId(cart);
+        if (count == 0) {
+            cartMapper.insertSelective(cart);
+        } else {
+            cartMapper.updateQuantity(cart);
+        }
+    }
+
+    @Override
+    public List<CartVO> list(Integer userId) {
+        return cartMapper.list(userId);
     }
 }

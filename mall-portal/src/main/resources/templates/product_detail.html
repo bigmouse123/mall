@@ -490,8 +490,6 @@
             'json'
         );
 
-        addCart();
-
         function addCart() {
             $.post(
                 '/cart/add',
@@ -528,7 +526,7 @@
                 field,
                 function (result) {
                     if (result.code == 0) {
-
+                        addCart();
                     } else {
                         mylayer.errorMsg(result.msg);
                     }

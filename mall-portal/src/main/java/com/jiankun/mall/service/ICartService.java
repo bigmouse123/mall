@@ -1,6 +1,9 @@
 package com.jiankun.mall.service;
 
 import com.jiankun.mall.pojo.Cart;
+import com.jiankun.mall.pojo.vo.CartVO;
+
+import java.util.List;
 
 /**
  * @author OfferKing
@@ -9,4 +12,6 @@ import com.jiankun.mall.pojo.Cart;
  */
 public interface ICartService {
     void add(Cart cart);
+
+    List<CartVO> list(Integer userId);
 }
