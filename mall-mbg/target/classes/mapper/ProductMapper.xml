@@ -190,6 +190,7 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
 
+
     <resultMap id="ProductResultMap" type="com.jiankun.mall.pojo.vo.ProductVO">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="category_id" jdbcType="INTEGER" property="categoryId"/>
@@ -252,5 +253,20 @@
         group by p.category_id
     </select>
 
+<!--    <select id="listByCategoryId" resultType="com.jiankun.mall.pojo.Product">-->
+<!--        select *-->
+<!--        from product-->
+<!--        <where>-->
+<!--            <if test="name!=null and name != ''">-->
+<!--                AND name LIKE CONCAT('%',#{name},'%')-->
+<!--            </if>-->
+<!--            <if test="categoryId != null and categoryId != ''">-->
+<!--                AND category_id = #{categoryId}-->
+<!--            </if>-->
+<!--            <if test="beginCreateTime!=null and endCreateTime!=null">-->
+<!--                AND create_time BETWEEN #{beginCreateTime} AND #{endCreateTime}-->
+<!--            </if>-->
+<!--        </where>-->
+<!--    </select>-->
 
 </mapper>

@@ -26,4 +26,6 @@ public interface ProductMapper {
     void updateStatus(Integer id, Integer status);
 
     List<CategoryCountVO> count();
+
+//    List<Product> listByCategoryId(ProductQuery productQuery);
 }

@@ -162,7 +162,6 @@
             </if>
         </where>
     </select>
-
     <delete id="deleteAll">
         delete
         from category
@@ -171,4 +170,17 @@
             #{id}
         </foreach>
     </delete>
+    <resultMap id="CategoryVOMap" type="com.jiankun.mall.pojo.vo.CategoryListVO">
+        <id column="parentId" property="id"></id>
+        <result column="parentName" property="name"></result>
+        <collection property="childList" ofType="com.jiankun.mall.pojo.Category">
+            <id column="id" property="id"></id>
+            <result column="name" property="name"></result>
+        </collection>
+    </resultMap>
+    <select id="listAll" resultMap="CategoryVOMap">
+        select c1.id as parentId, c1.`name` as parentName, c2.id, c2.`name`
+        FROM category as c1
+                 INNER JOIN category as c2 on c1.id = c2.parent_id
+    </select>
 </mapper>

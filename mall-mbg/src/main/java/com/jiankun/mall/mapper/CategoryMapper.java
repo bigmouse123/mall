@@ -2,6 +2,7 @@ package com.jiankun.mall.mapper;
 
 import com.jiankun.mall.pojo.Category;
 import com.jiankun.mall.pojo.query.CategoryQuery;
+import com.jiankun.mall.pojo.vo.CategoryVO;
 
 import java.util.List;
 
@@ -29,4 +30,6 @@ public interface CategoryMapper {
     List<Category> list(CategoryQuery categoryQuery);
 
     void deleteAll(int[] ids);
+
+    List<CategoryVO> listAll();
 }
