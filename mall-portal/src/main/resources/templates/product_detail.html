@@ -8,10 +8,12 @@
     <link rel="stylesheet" type="text/css" href="/css/mi.css">
     <link rel="stylesheet" type="text/css" href="/css/shop.css">
     <link rel="stylesheet" type="text/css" href="/css/footer1.css">
+    <link rel="stylesheet" type="text/css" href="/css/login.css">
     <link rel="stylesheet" type="text/css" href="/font-awesome/css/font-awesome.min.css">
     <script src="/js/jq_3.3.1_mi.js"></script>
     <script type="text/javascript" src="/layui/layui.js"></script>
     <script src="/js/detail.js"></script>
+    <script src="/mylayer.js"></script>
 </head>
 <body>
 <div class="header">
@@ -307,7 +309,7 @@
                 </div>
                 <p id="totalPrice" style="color:#FF6A00;font-size: 25px;margin-left: 30px;">总计&nbsp;：&nbsp;699元</p>
             </div>
-            <div class="shop_detail_cart">加入购物车</div>
+            <div class="shop_detail_cart" id="addCart">加入购物车</div>
             <p><i class="fa fa-check-circle-o"></i> 7天无理由退货 <i class="fa fa-check-circle-o"></i> 15天质量问题换货
                 <i class="fa fa-check-circle-o"></i> 365天保修 </p>
         </div>
@@ -427,37 +429,114 @@
             </div>
         </div>
     </div>
-    <script>
-        layui.use('carousel', function () {
-            var carousel = layui.carousel;
-            //建造实例
-            carousel.render({
-                elem: '#test1'
-                , width: '560px' //设置容器宽度
-                , height: '560px'
-                , arrow: 'always' //始终显示箭头
-                //,anim: 'updown' //切换动画方式
-            });
+</div>
+<div id="loginFrom" class="login_card" style="display: none">
+    <form class="layui-form" action="">
+        <!-- 账号 -->
+        <div class="user_box">
+            <div class="user">
+                <input type="text" name="name" class="username">
+            </div>
+            <div class="user_msg">请输入账号</div>
+        </div>
+        <!-- 密码 -->
+        <div class="user_box">
+            <div class="user">
+                <input type="password" name="password" class="password">
+            </div>
+            <div class="user_msg">请输入密码</div>
+        </div>
+        <!-- 登录按钮 -->
+        <button type="button" class="login_btn" lay-submit lay-filter="submitLogin">登录</button>
+        <!-- 登录说明 -->
+        <div class="login_other">
+            <a href="#" class="l_l">忘记密码？</a>
+            <a href="#" class="l_right">手机号登录</a>
+        </div>
+    </form>
+</div>
+<script>
+    layui.use(['carousel', 'form', 'layer'], function () {
+        var carousel = layui.carousel;
+        var form = layui.form;
+        var layer = layui.layer;
+        //建造实例
+        carousel.render({
+            elem: '#test1'
+            , width: '560px' //设置容器宽度
+            , height: '560px'
+            , arrow: 'always' //始终显示箭头
+            //,anim: 'updown' //切换动画方式
+        });
 
-            var queryString = window.location.search;
-            var urlParams = new URLSearchParams(queryString);
-            var id = urlParams.get("id");
+        var queryString = window.location.search;
+        var urlParams = new URLSearchParams(queryString);
+        var id = urlParams.get("id");
 
+        var quantity = 1;
+
+        $.post(
+            '/product/selectById',
+            {'id': id},
+            function (result) {
+                console.log(result);
+                var product = result.data;
+                $('#name').text(product.name);
+                $('#subtitle').text(product.subtitle);
+                $('#price').text(product.price);
+                $('#mainImage').attr('src', product.mainImage);
+                $('#detail').html(product.detail);
+            },
+            'json'
+        );
+
+        addCart();
+
+        function addCart() {
             $.post(
-                '/product/selectById',
-                {'id': id},
+                '/cart/add',
+                {
+                    'productId': id,
+                    'quantity': quantity
+                },
                 function (result) {
-                    console.log(result);
-                    var product = result.data;
-                    $('#name').text(product.name);
-                    $('#subtitle').text(product.subtitle);
-                    $('#price').text(product.price);
-                    $('#mainImage').attr('src', product.mainImage);
-                    $('#detail').html(product.detail);
+                    if (result.code == 0) {
+                        mylayer.okUrl(result.msg, '/page/cart/list')
+                    } else if (result.code == 2) {
+                        layer.open({
+                            type: 1,
+                            title: "登录",
+                            area: ["50%", "50%"],
+                            content: $('#loginFrom')
+                        })
+                    } else {
+                        mylayer.errorMsg(result.msg)
+                    }
+                },
+                'json'
+            );
+        }
+
+        $('#addCart').click(function () {
+            addCart();
+        })
+
+        form.on('submit(submitLogin)', function (data) {
+            var field = data.field;
+            $.post(
+                '/user/login',
+                field,
+                function (result) {
+                    if (result.code == 0) {
+
+                    } else {
+                        mylayer.errorMsg(result.msg);
+                    }
                 },
                 'json'
             );
         });
-    </script>
+    });
+</script>
 </body>
 </html>

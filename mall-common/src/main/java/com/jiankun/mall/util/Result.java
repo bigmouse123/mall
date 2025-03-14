@@ -6,6 +6,7 @@ package com.jiankun.mall.util;
 // JSON格式的通用响应对象，封装的就是后台返回给前台的所有信息
 public class Result<T> {
     public static final int ERROR = 1;
+    public static final int NOT_LOGIN = 2;
     public static final int OK = 0;
 
     // 当前状态（程序员判断状态）:成功、失败、未登录、没有权限
