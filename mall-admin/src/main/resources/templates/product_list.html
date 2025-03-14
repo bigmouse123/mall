@@ -220,10 +220,12 @@
                 });
             } else if (obj.event === 'content') {
                 layer.open({
-                    type: 2,
+                    // type: 2,
+                    type: 1,
                     title: data.name,
                     area: ['90%', '90%'],
-                    content: '/page/detail?id=' + data.id
+                    // content: '/page/detail?id=' + data.id
+                    content: data.detail
                 });
             }
         });

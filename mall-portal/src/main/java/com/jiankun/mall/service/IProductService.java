@@ -12,4 +12,6 @@ import com.jiankun.mall.util.PageResult;
 public interface IProductService {
 
     PageResult<Product> list(ProductQuery productQuery);
+
+    Product seleteById(Integer id);
 }

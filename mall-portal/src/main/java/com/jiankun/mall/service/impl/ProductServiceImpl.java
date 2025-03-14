@@ -30,4 +30,9 @@ public class ProductServiceImpl implements IProductService {
         int count = (int) pageInfo.getTotal();
         return new PageResult<>(0, "", count, list);
     }
+
+    @Override
+    public Product seleteById(Integer id) {
+        return productMapper.selectByPrimaryKey(id);
+    }
 }

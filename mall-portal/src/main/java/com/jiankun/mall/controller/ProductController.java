@@ -27,4 +27,10 @@ public class ProductController {
         PageResult<Product> pageResult = productService.list(productQuery);
         return pageResult;
     }
+
+    @RequestMapping("/selectById")
+    public Result selectById(Integer id) {
+        Product product = productService.seleteById(id);
+        return Result.ok(product);
+    }
 }
