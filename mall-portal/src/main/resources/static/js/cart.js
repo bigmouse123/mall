@@ -109,6 +109,26 @@ layui.use(['layer'], function () {
         });
     })
 
+    //修改商品数量
+    $('#cartId').on('change', '.num-value', function () {
+        var id = $(this).parents('.list-item').attr('id');
+        var quantity = this.value;
+        $.post(
+            '/cart/update',
+            {
+                'id': id,
+                'quantity': quantity
+            },
+            function (result) {
+                console.log(result);
+                if (result.code == 0) {
+                    mylayer.okMsg(result.msg);
+                }
+            },
+            'json'
+        );
+    })
+
     //加减按钮
     $('#cartId').on('click', 'button.minus', function () {
         var nowvalue = $(this).siblings('input').val();
