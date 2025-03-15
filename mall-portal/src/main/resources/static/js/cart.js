@@ -1,4 +1,6 @@
-$(function () {
+layui.use(['layer'], function () {
+    var layer = layui.layer;
+
     //初始化总价, 总选择数, 总条数;
     doPrice();
     //全选/选择框的鼠标移上变个颜色
@@ -87,7 +89,27 @@ $(function () {
         }
     }
 
+    //删除按钮
+    $('#cartId').on('click', '.fa-times', function () {
+        var id = $(this).parents('.list-item').attr('id');
+        layer.confirm('您确认要删除么?', function () {
+            $.post(
+                '/cart/deleteById',
+                {
+                    'id': id,
+                },
+                function (result) {
+                    console.log(result);
+                    if (result.code == 0) {
+                        mylayer.okUrl(result.msg, '/page/cart/list');
+                    }
+                },
+                'json'
+            );
+        });
+    })
 
+    //加减按钮
     $('#cartId').on('click', 'button.minus', function () {
         var nowvalue = $(this).siblings('input').val();
         nowvalue = parseInt(nowvalue);
@@ -99,6 +121,22 @@ $(function () {
         var danjia = parseFloat($(this).parents('.good-num').siblings('.good-price').html());
         var xiaoji = danjia * currentvalue;
         $(this).parents('.good-num').siblings('.good-total-price').html(xiaoji + '元');
+
+        var id = $(this).parents('.list-item').attr('id');
+        $.post(
+            '/cart/minus',
+            {
+                'id': id,
+                'quantity': currentvalue
+            },
+            function (result) {
+                console.log(result);
+                if (result.code == 0) {
+                    mylayer.okMsg(result.msg);
+                }
+            },
+            'json'
+        );
 
         //更新总价
         doPrice();
@@ -113,6 +151,22 @@ $(function () {
         var danjia = parseFloat($(this).parents('.good-num').siblings('.good-price').html());
         var xiaoji = danjia * currentvalue;
         $(this).parents('.good-num').siblings('.good-total-price').html(xiaoji + '元');
+
+        var id = $(this).parents('.list-item').attr('id');
+        $.post(
+            '/cart/plus',
+            {
+                'id': id,
+                'quantity': currentvalue
+            },
+            function (result) {
+                console.log(result);
+                if (result.code == 0) {
+                    mylayer.okMsg(result.msg);
+                }
+            },
+            'json'
+        );
 
         //更新总价
         doPrice();

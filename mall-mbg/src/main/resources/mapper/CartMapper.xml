@@ -165,14 +165,12 @@
                             ON c.product_id = p.id
         WHERE c.user_id = #{userId}
     </select>
-
     <select id="selectCountByUserIdAndProductId" resultType="java.lang.Integer">
         select count(*)
         from cart
         where user_id = #{userId}
           and product_id = #{productId}
     </select>
-
     <update id="updateQuantity">
         update cart
         set quantity = quantity + #{quantity}
@@ -183,6 +181,15 @@
         update cart
         set checked = #{checked}
         where user_id = #{userId}
+    </update>
+    <update id="minus">
+        update cart
+        set quantity = #{quantity}
+        where id = #{id}
+    </update><update id="plus">
+        update cart
+        set quantity = #{quantity}
+        where id = #{id}
     </update>
 
 </mapper>

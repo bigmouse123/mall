@@ -44,4 +44,19 @@ public class CartServiceImpl implements ICartService {
     public void updateCheckedAll(Integer checked, Integer userId) {
         cartMapper.updateCheckedAll(checked, userId);
     }
+
+    @Override
+    public void minus(Cart cart) {
+        cartMapper.minus(cart);
+    }
+
+    @Override
+    public void plus(Cart cart) {
+        cartMapper.plus(cart);
+    }
+
+    @Override
+    public void deleteById(Integer id) {
+        cartMapper.deleteByPrimaryKey(id);
+    }
 }

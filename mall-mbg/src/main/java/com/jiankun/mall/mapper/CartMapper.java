@@ -25,4 +25,8 @@ public interface CartMapper {
     void updateQuantity(Cart cart);
 
     void updateCheckedAll(Integer checked, Integer userId);
+
+    void minus(Cart cart);
+
+    void plus(Cart cart);
 }

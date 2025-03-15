@@ -18,4 +18,10 @@ public interface ICartService {
     void update(Cart cart);
 
     void updateCheckedAll(Integer checked, Integer userId);
+
+    void minus(Cart cart);
+
+    void plus(Cart cart);
+
+    void deleteById(Integer id);
 }

@@ -53,4 +53,22 @@ public class CartController {
         cartService.updateCheckedAll(checked, user.getId());
         return Result.ok("更新成功");
     }
+
+    @RequestMapping("/minus")
+    public Result minus(Cart cart) {
+        cartService.minus(cart);
+        return Result.ok();
+    }
+
+    @RequestMapping("/plus")
+    public Result plus(Cart cart) {
+        cartService.plus(cart);
+        return Result.ok();
+    }
+
+    @RequestMapping("/deleteById")
+    public Result deleteById(Integer id) {
+        cartService.deleteById(id);
+        return Result.ok("删除成功");
+    }
 }
