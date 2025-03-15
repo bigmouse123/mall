@@ -10,8 +10,11 @@
     <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/layui/css/layui.css">
     <script src="/js/jq_3.3.1_mi.js"></script>
-    <script src="/js/cart.js"></script>
     <script src="/layui/layui.js"></script>
+    <script src="/layui/lay/modules/layer.js"></script>
+    <script src="/mylayer.js"></script>
+    <script src="/js/cart.js"></script>
+
 </head>
 <body>
 <!-- 购物车头部 -->
@@ -290,8 +293,12 @@
                 console.log(result.data);
                 var html = '';
                 $(result.data).each(function () {
-                    html += '<div class="list list-item">';
-                    html += '    <div class="select"><i class="fa fa-check"></i></div>';
+                    html += '<div id="' + this.id + '" class="list list-item">';
+                    if (this.checked) {
+                        html += '    <div class="select"><i class="fa fa-check checked"></i></div>';
+                    } else {
+                        html += '    <div class="select"><i class="fa fa-check"></i></div>';
+                    }
                     html += '    <div class="good-img"><img src="' + this.productMainImage + '" alt=""/></div>';
                     html += '    <div class="good-name">' + this.productName + '</div>';
                     html += '    <div class="good-price">' + this.productPrice + '</div>';

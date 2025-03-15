@@ -40,4 +40,17 @@ public class CartController {
         List<CartVO> list = cartService.list(user.getId());
         return Result.ok(list);
     }
+
+    @RequestMapping("/update")
+    public Result update(Cart cart) {
+        cartService.update(cart);
+        return Result.ok("更新成功");
+    }
+
+    @RequestMapping("/updateCheckedAll")
+    public Result updateCheckedAll(Integer checked, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        cartService.updateCheckedAll(checked, user.getId());
+        return Result.ok("更新成功");
+    }
 }

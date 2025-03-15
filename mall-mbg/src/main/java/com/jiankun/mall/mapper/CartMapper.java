@@ -23,4 +23,6 @@ public interface CartMapper {
     int selectCountByUserIdAndProductId(Cart cart);
 
     void updateQuantity(Cart cart);
+
+    void updateCheckedAll(Integer checked, Integer userId);
 }

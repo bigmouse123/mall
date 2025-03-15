@@ -34,4 +34,14 @@ public class CartServiceImpl implements ICartService {
     public List<CartVO> list(Integer userId) {
         return cartMapper.list(userId);
     }
+
+    @Override
+    public void update(Cart cart) {
+        cartMapper.updateByPrimaryKeySelective(cart);
+    }
+
+    @Override
+    public void updateCheckedAll(Integer checked, Integer userId) {
+        cartMapper.updateCheckedAll(checked, userId);
+    }
 }

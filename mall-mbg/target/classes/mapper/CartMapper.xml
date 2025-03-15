@@ -179,5 +179,10 @@
         where user_id = #{userId}
           and product_id = #{productId}
     </update>
+    <update id="updateCheckedAll">
+        update cart
+        set checked = #{checked}
+        where user_id = #{userId}
+    </update>
 
 </mapper>

@@ -14,4 +14,8 @@ public interface ICartService {
     void add(Cart cart);
 
     List<CartVO> list(Integer userId);
+
+    void update(Cart cart);
+
+    void updateCheckedAll(Integer checked, Integer userId);
 }

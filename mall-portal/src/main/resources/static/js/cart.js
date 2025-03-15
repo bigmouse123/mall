@@ -24,11 +24,29 @@ $(function () {
     // })
     $('#cartId').on('click', '.fa-check', function () {
         var cla = $(this).attr('class');
+        var id = $(this).parents('.list-item').attr('id');
+        var checked;
         if (cla != 'fa fa-check checked') {
             $(this).attr('class', 'fa fa-check checked');
+            checked = 1;
         } else {
             $(this).attr('class', 'fa fa-check');
+            checked = 0;
         }
+        $.post(
+            '/cart/update',
+            {
+                'id': id,
+                'checked': checked
+            },
+            function (result) {
+                console.log(result);
+                if (result.code == 0) {
+                    mylayer.okMsg(result.msg);
+                }
+            },
+            'json'
+        );
         doCheckAll();
         doPrice();
     })
@@ -36,11 +54,25 @@ $(function () {
     //全选框勾选
     $('#check-all').click(function () {
         var cla = $(this).attr('class');
+        var checked;
         if (cla != 'fa fa-check checked') {
             $('.fa-check').attr('class', 'fa fa-check checked');
+            checked = 1;
         } else {
             $('.fa-check').attr('class', 'fa fa-check');
+            checked = 0;
         }
+        $.post(
+            '/cart/updateCheckedAll',
+            {'checked': checked},
+            function (result) {
+                console.log(result);
+                if (console.code == 0) {
+                    mylayer.okMsg(result.msg);
+                }
+            },
+            'json'
+        );
         doPrice();
     })
 
