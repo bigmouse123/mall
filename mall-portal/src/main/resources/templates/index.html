@@ -2941,8 +2941,7 @@
 
 <!-- 采用html , css , js 分开写的原则
 这里属于自己写的 js 部分 -->
-<!-- 主页 -->
-<script src="/js/index.js"></script>
+
 <!-- 轮播图 -->
 <script src="/js/slideshow.js "></script>
 <!-- 轮播图动画 -->
@@ -2955,6 +2954,8 @@
 
 <script src="/jquery-2.1.4.js"></script>
 <script src="/mylayer.js"></script>
+<!-- 主页 -->
+<script src="/js/index.js"></script>
 
 <script>
     $(function () {
@@ -2989,23 +2990,23 @@
                     $('#topCategoryId').append(html);
 
                     // 全部商品分类
-                    var category_list = document.querySelectorAll(".category-list"),
-                        commodity = document.querySelectorAll(".commodity");
-                    for (var i = 0; i < category_list.length; i++) {
-                        category_list[i].index = i;
-                        category_list[i].onmouseover = function () {
-                            for (var i = 0; i < commodity.length; i++) {
-                                commodity[i].style.display = "none";
-                            }
-                            commodity[this.index].style.display = "block";
-                            category_list[this.index].classList.add("listBcolor");
-
-                        }
-                        category_list[i].onmouseout = function () {
-                            category_list[this.index].classList.remove("listBcolor");
-                            commodity[this.index].style.display = "none";
-                        }
-                    }
+                    // var category_list = document.querySelectorAll(".category-list"),
+                    //     commodity = document.querySelectorAll(".commodity");
+                    // for (var i = 0; i < category_list.length; i++) {
+                    //     category_list[i].index = i;
+                    //     category_list[i].onmouseover = function () {
+                    //         for (var i = 0; i < commodity.length; i++) {
+                    //             commodity[i].style.display = "none";
+                    //         }
+                    //         commodity[this.index].style.display = "block";
+                    //         category_list[this.index].classList.add("listBcolor");
+                    //
+                    //     }
+                    //     category_list[i].onmouseout = function () {
+                    //         category_list[this.index].classList.remove("listBcolor");
+                    //         commodity[this.index].style.display = "none";
+                    //     }
+                    // }
                 }
             },
             'json'

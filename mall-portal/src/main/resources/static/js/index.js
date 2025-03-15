@@ -1,11 +1,11 @@
 // app     初始化qpp
 var J_app = document.getElementById("j-app"),
     appCode = document.querySelector(".appcode");
-J_app.onmouseover = function() {
+J_app.onmouseover = function () {
     appCode.style.height = "148px";
     J_app.classList.add('active');
 }
-J_app.onmouseout = function() {
+J_app.onmouseout = function () {
     appCode.style.height = "0";
     J_app.classList.remove('active');
 }
@@ -14,31 +14,31 @@ J_app.onmouseout = function() {
 var j_menu = document.querySelector(".j-menu"),
     site_Shop = document.querySelector(".site-shop"),
     cartColor = document.querySelector(".cart");
-site_Shop.onmouseover = function() {
+site_Shop.onmouseover = function () {
     j_menu.style.height = "99px";
     cartColor.classList.add("cart-color");
 }
-site_Shop.onmouseout = function() {
-        j_menu.style.height = "0";
-        cartColor.classList.remove("cart-color");
-    }
-    /*搜索框*/
+site_Shop.onmouseout = function () {
+    j_menu.style.height = "0";
+    cartColor.classList.remove("cart-color");
+}
+/*搜索框*/
 var searchText = document.querySelector(".search-text"),
     searchBtn = document.querySelector(".search-btn");
-searchText.onfocus = function() {
+searchText.onfocus = function () {
     searchText.classList.add("allBorder");
     searchBtn.classList.add("allBorder");
 }
-searchText.onblur = function() {
-        searchText.classList.remove("allBorder");
-        searchBtn.classList.remove("allBorder");
-    }
-    /*nav - js*/
+searchText.onblur = function () {
+    searchText.classList.remove("allBorder");
+    searchBtn.classList.remove("allBorder");
+}
+/*nav - js*/
 var headerNavMenu = document.querySelectorAll(".header-nav-menu"),
     navItem = document.querySelectorAll(".nav-item");
 for (var i = 0; i < navItem.length; i++) {
     navItem[i].index = i;
-    navItem[i].onmouseover = function() {
+    navItem[i].onmouseover = function () {
         for (var i = 0; i < headerNavMenu.length; i++) {
             headerNavMenu[i].style.display = "none";
         }
@@ -46,30 +46,44 @@ for (var i = 0; i < navItem.length; i++) {
         headerNavMenu[this.index].style.borderTop = "1px solid #e0e0e0";
         headerNavMenu[this.index].classList.add("menuHeight");
     }
-    navItem[i].onmouseout = function() {
+    navItem[i].onmouseout = function () {
         headerNavMenu[this.index].classList.remove("menuHeight");
         headerNavMenu[this.index].style.border = "none";
     }
 }
 
-// 全部商品分类
-var category_list = document.querySelectorAll(".category-list"),
-    commodity = document.querySelectorAll(".commodity");
-for (var i = 0; i < category_list.length; i++) {
-    category_list[i].index = i;
-    category_list[i].onmouseover = function() {
-        for (var i = 0; i < commodity.length; i++) {
-            commodity[i].style.display = "none";
-        }
-        commodity[this.index].style.display = "block";
-        category_list[this.index].classList.add("listBcolor");
+$('#topCategoryId').on('mouseover', '.category-list', function () {
+    var commodity = document.querySelectorAll(".commodity");
+    for (var i = 0; i < commodity.length; i++) {
+        commodity[i].style.display = "none";
+    }
+    $(this).find(".commodity")[0].style.display = "block";
+    // $(this).find(".commodity").css('display', 'block');
+    this.classList.add("listBcolor");
+})
+$('#topCategoryId').on('mouseout', '.category-list', function () {
+    this.classList.remove("listBcolor");
+    $(this).find(".commodity").css('display', 'none');
+})
 
-    }
-    category_list[i].onmouseout = function() {
-        category_list[this.index].classList.remove("listBcolor");
-        commodity[this.index].style.display = "none";
-    }
-}
+// 全部商品分类
+// var category_list = document.querySelectorAll(".category-list");
+// var commodity = document.querySelectorAll(".commodity");
+// for (var i = 0; i < category_list.length; i++) {
+//     category_list[i].index = i;
+//     category_list[i].onmouseover = function () {
+//         for (var i = 0; i < commodity.length; i++) {
+//             commodity[i].style.display = "none";
+//         }
+//         commodity[this.index].style.display = "block";
+//         category_list[this.index].classList.add("listBcolor");
+//
+//     }
+//     category_list[i].onmouseout = function () {
+//         category_list[this.index].classList.remove("listBcolor");
+//         commodity[this.index].style.display = "none";
+//     }
+// }
 //倒计时
 
 var spans = document.querySelectorAll(".countdown span");
@@ -77,6 +91,7 @@ var spans = document.querySelectorAll(".countdown span");
 count();
 // 定时器
 var times = setInterval(count, 1000);
+
 function count() {
     var date = new Date();
     var InDate = new Date('2021-4-15 23:00:00');
@@ -96,42 +111,43 @@ function count() {
     spans[1].innerHTML = min;
     spans[2].innerHTML = sec;
     //关闭定时器，使时间变为00：00：00
-    
+
     if (sInDate <= 0) {
         clearInterval(times);
         spans[0].innerHTML = "00";
         spans[1].innerHTML = "00";
         spans[2].innerHTML = "00";
     }
-    
-   
-}
 
+
+}
 
 
 //微信
 var J_followWxImg = document.getElementById("J_followWxImg"),
     J_followWx = document.getElementById("J_followWx");
-J_followWx.onmouseover = function() {
+J_followWx.onmouseover = function () {
     J_followWxImg.style.display = "block";
 }
-J_followWx.onmouseout = function() {
+J_followWx.onmouseout = function () {
     J_followWxImg.style.display = "none";
 }
 
 //底部图片切换
 var J_safeAuth = document.querySelector(".J_safeAuth");
-setInterval(function() {
+setInterval(function () {
     J_safeAuth.classList.add("active");
 }, 2000);
-setInterval(function() {
+setInterval(function () {
     J_safeAuth.classList.remove("active");
 }, 4000);
 
 //回顶部
 var J_atop = document.getElementById("J_atop");
 // 当网页向下滑动 854px 出现"返回顶部" 按钮
-window.onscroll = function() { scrollFun() };
+window.onscroll = function () {
+    scrollFun()
+};
 
 function scrollFun() {
     if (document.body.scrollTop > 854 || document.documentElement.scrollTop > 854) {
@@ -148,6 +164,6 @@ function topFun() {
 }
 
 //点击返回顶部
-J_atop.onclick = function() {
+J_atop.onclick = function () {
     topFun();
 }
