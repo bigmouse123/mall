@@ -1,6 +1,7 @@
 package com.jiankun.mall.mapper;
 
 import com.jiankun.mall.pojo.Cart;
+import com.jiankun.mall.pojo.query.CartQuery;
 import com.jiankun.mall.pojo.vo.CartVO;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public interface CartMapper {
 
     int updateByPrimaryKey(Cart record);
 
-    List<CartVO> list(Integer userId);
+    List<CartVO> list(CartQuery cartQuery);
 
     int selectCountByUserIdAndProductId(Cart cart);
 

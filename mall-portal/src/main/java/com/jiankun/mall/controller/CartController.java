@@ -2,6 +2,7 @@ package com.jiankun.mall.controller;
 
 import com.jiankun.mall.pojo.Cart;
 import com.jiankun.mall.pojo.User;
+import com.jiankun.mall.pojo.query.CartQuery;
 import com.jiankun.mall.pojo.vo.CartVO;
 import com.jiankun.mall.service.ICartService;
 import com.jiankun.mall.util.Result;
@@ -35,9 +36,10 @@ public class CartController {
     }
 
     @RequestMapping("/list")
-    public Result list(HttpSession session) {
+    public Result list(HttpSession session, CartQuery cartQuery) {
         User user = (User) session.getAttribute("user");
-        List<CartVO> list = cartService.list(user.getId());
+        cartQuery.setUserId(user.getId());
+        List<CartVO> list = cartService.list(cartQuery);
         return Result.ok(list);
     }
 

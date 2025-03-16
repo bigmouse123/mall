@@ -3,6 +3,7 @@ package com.jiankun.mall.service.impl;
 import com.jiankun.mall.controller.CartController;
 import com.jiankun.mall.mapper.CartMapper;
 import com.jiankun.mall.pojo.Cart;
+import com.jiankun.mall.pojo.query.CartQuery;
 import com.jiankun.mall.pojo.vo.CartVO;
 import com.jiankun.mall.service.ICartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +32,8 @@ public class CartServiceImpl implements ICartService {
     }
 
     @Override
-    public List<CartVO> list(Integer userId) {
-        return cartMapper.list(userId);
+    public List<CartVO> list(CartQuery cartQuery) {
+        return cartMapper.list(cartQuery);
     }
 
     @Override

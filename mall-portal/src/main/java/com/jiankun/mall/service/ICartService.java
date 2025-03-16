@@ -1,6 +1,7 @@
 package com.jiankun.mall.service;
 
 import com.jiankun.mall.pojo.Cart;
+import com.jiankun.mall.pojo.query.CartQuery;
 import com.jiankun.mall.pojo.vo.CartVO;
 
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
 public interface ICartService {
     void add(Cart cart);
 
-    List<CartVO> list(Integer userId);
+    List<CartVO> list(CartQuery cartQuery);
 
     void update(Cart cart);
 
