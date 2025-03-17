@@ -63,8 +63,8 @@
             <h3>付款方式</h3>
             <h5 id="0" style="border-color:rgb(255,106,0)">货到付款</h5>
             <h5 id="1">微信</h5>
-            <h5 id="3">支付宝</h5>
-            <h5 id="4">银联</h5>
+            <h5 id="2">支付宝</h5>
+            <h5 id="3">银联</h5>
         </div>
         <h2 style="border: none;margin-top:0px; ">发票<span style="color: #FF6A00;font-size: 13px;margin-left: 125px;">电子发票&nbsp;&nbsp;  个人  &nbsp;&nbsp;商品明细&nbsp;&nbsp;  修改 ></span>
         </h2>
@@ -250,11 +250,13 @@
     );
 
     $('.submit-cart').click(function () {
+        console.log($('.close_add[checked = "checked"]').attr('id'));
+        console.log($('.close_data h5[checked = "checked"]').attr('id'));
         $.post(
             '/order/add',
             {
                 'shippingId': $('.close_add[checked = "checked"]').attr('id'),
-                'paymentType': $('.close_data h5[checked = "checked"]').attr('id')
+                'paymentType': $('.close_data h5[checked = "checked"]').attr('id'),
             },
             function (result) {
                 console.log(result);

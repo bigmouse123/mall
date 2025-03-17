@@ -22,6 +22,7 @@ public class OrderController {
 
     @RequestMapping("/add")
     public Result add(Order order, HttpSession session) {
+        System.out.println(order);
         User user = (User) session.getAttribute("user");
         order.setUserId(user.getId());
         orderService.add(order);
