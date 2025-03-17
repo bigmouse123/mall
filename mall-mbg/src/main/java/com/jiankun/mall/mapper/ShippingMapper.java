@@ -2,6 +2,8 @@ package com.jiankun.mall.mapper;
 
 import com.jiankun.mall.pojo.Shipping;
 
+import java.util.List;
+
 public interface ShippingMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,6 @@ public interface ShippingMapper {
     int updateByPrimaryKeySelective(Shipping record);
 
     int updateByPrimaryKey(Shipping record);
+
+    List<Shipping> list(Integer userId);
 }

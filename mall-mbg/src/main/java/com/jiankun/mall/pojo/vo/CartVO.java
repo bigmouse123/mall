@@ -3,6 +3,8 @@ package com.jiankun.mall.pojo.vo;
 import com.jiankun.mall.pojo.Product;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 /**
  * @author OfferKing
  * @version 1.0
@@ -18,7 +20,7 @@ public class CartVO {
 
     private String productName;
 
-    private Integer productPrice;
+    private BigDecimal productPrice;
 
     private String productMainImage;
 

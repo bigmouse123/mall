@@ -10,5 +10,5 @@ import lombok.Data;
 @Data
 public class CartQuery {
     private Integer userId;
-    private String checked;
+    private Integer checked;
 }
