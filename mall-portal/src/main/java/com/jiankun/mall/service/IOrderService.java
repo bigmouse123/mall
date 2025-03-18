@@ -1,6 +1,9 @@
 package com.jiankun.mall.service;
 
 import com.jiankun.mall.pojo.Order;
+import com.jiankun.mall.pojo.vo.OrderVO;
+
+import java.util.List;
 
 /**
  * @author OfferKing
@@ -9,4 +12,6 @@ import com.jiankun.mall.pojo.Order;
  */
 public interface IOrderService {
     void add(Order order);
+
+    List<OrderVO> list(Integer userId);
 }

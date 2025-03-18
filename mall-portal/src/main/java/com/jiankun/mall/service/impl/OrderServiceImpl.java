@@ -7,6 +7,7 @@ import com.jiankun.mall.pojo.Order;
 import com.jiankun.mall.pojo.OrderItem;
 import com.jiankun.mall.pojo.query.CartQuery;
 import com.jiankun.mall.pojo.vo.CartVO;
+import com.jiankun.mall.pojo.vo.OrderVO;
 import com.jiankun.mall.service.IOrderService;
 import com.jiankun.mall.util.SnowFlake;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,5 +62,10 @@ public class OrderServiceImpl implements IOrderService {
         order.setOrderNo(id);
         order.setPayment(payment);
         orderMapper.insertSelective(order);
+    }
+
+    @Override
+    public List<OrderVO> list(Integer userId) {
+        return orderMapper.list(userId);
     }
 }
