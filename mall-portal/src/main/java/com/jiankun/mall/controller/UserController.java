@@ -29,4 +29,10 @@ public class UserController {
         session.setAttribute("user", user);
         return Result.ok("登录成功");
     }
+
+    @RequestMapping("/logout")
+    public Result logout(HttpSession session) {
+        session.removeAttribute("user");
+        return Result.ok("退出成功");
+    }
 }
