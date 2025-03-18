@@ -12,9 +12,9 @@
         <property name="endingDelimiter" value="`"/>
 
         <!-- 配置生成pojo的序列化的插件，mybatis支持很多插件，这些插件都在 org.mybatis.generator.plugins包下  -->
-        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
         <!--覆盖生成XML文件-->
-        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin" />
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
         <!-- 生成的实体类添加toString()方法 -->
         <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
 
@@ -43,15 +43,15 @@
         <javaClientGenerator targetProject="src\main\java"
                              targetPackage="com.jiankun.mall.mapper"
                              type="XMLMAPPER"/>
-<!--
-        <table schema="" tableName="cart" ></table>
-        <table schema="" tableName="category"></table>
-        <table schema="" tableName="order"></table>
-        <table schema="" tableName="order_item"></table>
-        <table schema="" tableName="pay_info"></table>
-        <table schema="" tableName="product" ></table>
-        <table schema="" tableName="shipping"></table>
-        <table schema="" tableName="user"></table>-->
+        <!--
+                <table schema="" tableName="cart" ></table>
+                <table schema="" tableName="category"></table>
+                <table schema="" tableName="order"></table>
+                <table schema="" tableName="order_item"></table>
+                <table schema="" tableName="pay_info"></table>
+                <table schema="" tableName="product" ></table>
+                <table schema="" tableName="shipping"></table>
+                <table schema="" tableName="user"></table>-->
 
         <!-- 指定数据库表 -->
         <!--<table schema="" tableName="cart" enableCountByExample="false" enableUpdateByExample="false"
@@ -82,6 +82,9 @@
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false"></table>
         <table schema="" tableName="admin"  enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"></table>-->
+        <!--<table schema="" tableName="oper_log" enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false"></table>-->
 
