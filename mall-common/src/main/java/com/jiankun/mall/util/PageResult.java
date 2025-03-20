@@ -1,5 +1,6 @@
 package com.jiankun.mall.util;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  * @version 1.0
  * @date 2025/2/14 10:47
  */
-public class PageResult<T> {
+public class PageResult<T> implements Serializable {
     Integer code;
     String msg;
     Integer count;

@@ -9,6 +9,8 @@ import com.jiankun.mall.mapper.ProductMapper;
 import com.jiankun.mall.pojo.Product;
 import com.jiankun.mall.util.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -52,6 +54,7 @@ public class ProductServiceImpl implements IProductService {
         redisTemplate.opsForSet().add(RedisConstant.UPLOAD_IMAGE_TO_DB, product.getMainImage());
     }
 
+    @Cacheable(value = "product", key = "#root.methodName + ':' + #id")
     @Override
     public Product selectById(Integer id) {
         Product product = productMapper.selectByPrimaryKey(id);
@@ -60,6 +63,8 @@ public class ProductServiceImpl implements IProductService {
         return product;
     }
 
+//    @CacheEvict(value = "product", key = "'selectById:' + #product.id")
+    @CacheEvict(value = "product", allEntries = true)
     @Override
     public void update(Product product, String oldImage) {
         System.out.println(product);

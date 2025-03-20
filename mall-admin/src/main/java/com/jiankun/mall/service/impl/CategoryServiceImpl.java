@@ -8,6 +8,7 @@ import com.jiankun.mall.pojo.query.CategoryQuery;
 import com.jiankun.mall.service.ICategoryService;
 import com.jiankun.mall.util.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,11 +29,13 @@ public class CategoryServiceImpl implements ICategoryService {
     }
 
     @Override
+    @Cacheable(value = "category", key = "#root.methodName")
     public List<Category> selectAll1() {
         return categoryMapper.selectAll1();
     }
 
     @Override
+    @Cacheable(value = "category", key = "#root.methodName + ':' + #id")
     public List<Category> selectAll2(Integer id) {
         return categoryMapper.selectAll2(id);
     }
