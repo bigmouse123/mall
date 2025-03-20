@@ -4,6 +4,7 @@ import com.jiankun.mall.mapper.OperLogMapper;
 import com.jiankun.mall.pojo.OperLog;
 import com.jiankun.mall.service.IOperLogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,6 +18,7 @@ public class OperLogServiceImpl implements IOperLogService {
     private OperLogMapper operLogMapper;
 
     @Override
+    @Async("logTaskExecutor")
     public void add(OperLog operLog) {
         System.out.println(operLog);
         operLogMapper.add(operLog);

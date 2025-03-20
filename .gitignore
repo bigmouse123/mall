@@ -4,6 +4,7 @@ out/
 !**/src/test/**/out/
 *.class
 application.properties
+application.yml
 
 ### Eclipse ###
 .apt_generated

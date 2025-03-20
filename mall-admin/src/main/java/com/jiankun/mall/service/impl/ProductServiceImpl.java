@@ -30,6 +30,7 @@ public class ProductServiceImpl implements IProductService {
     private RedisTemplate redisTemplate;
 
     @Override
+    @Cacheable(value = "product", key = "#root.methodName + ':' + #productQuery.page", sync = true)
     public PageResult<Product> list(ProductQuery productQuery) {
         PageHelper.startPage(productQuery.getPage(), productQuery.getLimit());
         List<Product> list = productMapper.list(productQuery);
@@ -54,7 +55,7 @@ public class ProductServiceImpl implements IProductService {
         redisTemplate.opsForSet().add(RedisConstant.UPLOAD_IMAGE_TO_DB, product.getMainImage());
     }
 
-    @Cacheable(value = "product", key = "#root.methodName + ':' + #id")
+    @Cacheable(value = "product", key = "#root.methodName + ':' + #id", sync = true)
     @Override
     public Product selectById(Integer id) {
         Product product = productMapper.selectByPrimaryKey(id);

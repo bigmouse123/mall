@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 // 声明该类是一个SpringBoot的引导类
@@ -16,6 +17,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 // 开启缓存
 @EnableCaching
+// 开启操作日志异步记录
+@EnableAsync
 public class AdminApplication {
 
     public static void main(String[] args) {
