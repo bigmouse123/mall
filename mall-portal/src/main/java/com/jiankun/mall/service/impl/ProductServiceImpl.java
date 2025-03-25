@@ -2,6 +2,7 @@ package com.jiankun.mall.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.jiankun.mall.exception.JKException;
 import com.jiankun.mall.mapper.ProductMapper;
 import com.jiankun.mall.pojo.Product;
 import com.jiankun.mall.pojo.query.ProductQuery;
@@ -35,6 +36,9 @@ public class ProductServiceImpl implements IProductService {
         List<Product> list = productMapper.list(productQuery);
         PageInfo pageInfo = new PageInfo(list);
         int count = (int) pageInfo.getTotal();
+//        if (count > 0) {
+//            throw new JKException("自定义异常");
+//        }
         return new PageResult<>(0, "", count, list);
     }
 
