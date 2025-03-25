@@ -14,4 +14,8 @@ public interface IOrderService {
     void add(Order order);
 
     List<OrderVO> list(Integer userId);
+
+    Order selectById(Long orderNo);
+
+    void updateStatus(Long orderNo, Integer status);
 }

@@ -229,4 +229,9 @@
         WHERE o.user_id = #{userId}
         ORDER BY create_time DESC
     </select>
+    <update id="updateStatus">
+        update `order`
+        set status = #{status}
+        where order_no = #{orderNo}
+    </update>
 </mapper>

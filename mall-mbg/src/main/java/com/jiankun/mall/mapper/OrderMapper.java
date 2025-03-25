@@ -19,4 +19,6 @@ public interface OrderMapper {
     int updateByPrimaryKey(Order record);
 
     List<OrderVO> list(Integer userId);
+
+    void updateStatus(Long orderNo, Integer status);
 }

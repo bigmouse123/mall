@@ -424,7 +424,17 @@
                     $(result.data).each(function () {
                         html += '<div class="order_right_show" id="register_0" style="display:block">';
                         html += '    <div class="order_right_content">';
-                        html += '        <h2>' + this.status + '</h2>';
+                        if (this.status == 0) {
+                            html += '        <h2>已取消</h2>'
+                        } else if (this.status == 1) {
+                            html += '        <h2>未支付</h2>'
+                        } else if (this.status == 2) {
+                            html += '        <h2>已支付</h2>'
+                        } else if (this.status == 3) {
+                            html += '        <h2>已发货</h2>'
+                        } else if (this.status == 4) {
+                            html += '        <h2>交易成功</h2>'
+                        }
                         html += '        <p>' + this.createTime + ' | XXX | 订单号： ' + this.orderNo + ' |' + this.paymentType + ' <span>订单金额：<b> ' + this.payment + '</b> 元 </span>';
                         html += '        </p>';
                         $(this.list).each(function () {
