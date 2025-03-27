@@ -1,0 +1,33 @@
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: com.jiankun.mall.pojo
+server:
+  port: 80
+spring:
+  data:
+    redis:
+      database: 0
+      host: 127.0.0.1
+      port: 6379
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    password: a200211080
+    url: jdbc:mysql://localhost:3306/mall?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2b8&zeroDateTimeBehavior=CONVERT_TO_NULL
+    username: root
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  rabbitmq:
+    host: 127.0.0.1 # rabbitMQ的ip地址
+    port: 5672 # 端口
+    username: guest
+    password: guest
+    virtual-host: /
+    listener:
+      simple:
+        prefetch: 1
+  profiles:
+    active: dev
