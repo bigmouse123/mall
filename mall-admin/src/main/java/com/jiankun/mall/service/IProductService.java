@@ -2,6 +2,7 @@ package com.jiankun.mall.service;
 
 import com.jiankun.mall.pojo.Product;
 import com.jiankun.mall.pojo.query.ProductQuery;
+import com.jiankun.mall.pojo.vo.ProductVO;
 import com.jiankun.mall.util.PageResult;
 
 /**
@@ -11,7 +12,7 @@ import com.jiankun.mall.util.PageResult;
  */
 public interface IProductService {
 
-    PageResult<Product> list(ProductQuery productQuery);
+    PageResult<ProductVO> list(ProductQuery productQuery);
 
     void deleteById(Integer id);
 

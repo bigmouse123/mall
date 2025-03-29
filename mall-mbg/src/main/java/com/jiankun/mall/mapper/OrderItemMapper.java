@@ -1,6 +1,10 @@
 package com.jiankun.mall.mapper;
 
 import com.jiankun.mall.pojo.OrderItem;
+import com.jiankun.mall.pojo.query.OrderQuery;
+import com.jiankun.mall.pojo.vo.OrderItemVO;
+
+import java.util.List;
 
 public interface OrderItemMapper {
     int deleteByPrimaryKey(Integer id);
@@ -14,4 +18,6 @@ public interface OrderItemMapper {
     int updateByPrimaryKeySelective(OrderItem record);
 
     int updateByPrimaryKey(OrderItem record);
+
+    List<OrderItemVO> list(OrderQuery orderQuery);
 }

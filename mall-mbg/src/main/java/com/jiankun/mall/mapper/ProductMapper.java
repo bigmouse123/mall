@@ -3,6 +3,7 @@ package com.jiankun.mall.mapper;
 import com.jiankun.mall.pojo.Product;
 import com.jiankun.mall.pojo.query.ProductQuery;
 import com.jiankun.mall.pojo.vo.CategoryCountVO;
+import com.jiankun.mall.pojo.vo.ProductVO;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public interface ProductMapper {
 
     int updateByPrimaryKey(Product record);
 
-    List<Product> list(ProductQuery productQuery);
+    List<ProductVO> list(ProductQuery productQuery);
 
     void deleteAll(int[] ids);
 

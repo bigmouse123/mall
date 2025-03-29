@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.jiankun.mall.constant.RedisConstant;
 import com.jiankun.mall.pojo.query.ProductQuery;
+import com.jiankun.mall.pojo.vo.ProductVO;
 import com.jiankun.mall.service.IProductService;
 import com.jiankun.mall.mapper.ProductMapper;
 import com.jiankun.mall.pojo.Product;
@@ -31,9 +32,9 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     @Cacheable(value = "product", key = "#root.methodName + ':' + #productQuery.page", sync = true)
-    public PageResult<Product> list(ProductQuery productQuery) {
+    public PageResult<ProductVO> list(ProductQuery productQuery) {
         PageHelper.startPage(productQuery.getPage(), productQuery.getLimit());
-        List<Product> list = productMapper.list(productQuery);
+        List<ProductVO> list = productMapper.list(productQuery);
         PageInfo pageInfo = new PageInfo(list);
         int count = (int) pageInfo.getTotal();
         return new PageResult<>(0, "", count, list);

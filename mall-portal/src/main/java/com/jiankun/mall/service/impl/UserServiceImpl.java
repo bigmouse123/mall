@@ -20,4 +20,15 @@ public class UserServiceImpl implements IUserService {
     public User login(String name, String password) {
         return userMapper.login(name, password);
     }
+
+    @Override
+    public Boolean register(User user) {
+        System.out.println(userMapper.register(user));
+        return userMapper.register(user) > 0;
+    }
+
+    @Override
+    public void add(User user) {
+        userMapper.insertSelective(user);
+    }
 }

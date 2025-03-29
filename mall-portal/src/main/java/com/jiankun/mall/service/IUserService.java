@@ -10,4 +10,8 @@ import com.jiankun.mall.pojo.User;
 public interface IUserService {
 
     User login(String name, String password);
+
+    Boolean register(User user);
+
+    void add(User user);
 }

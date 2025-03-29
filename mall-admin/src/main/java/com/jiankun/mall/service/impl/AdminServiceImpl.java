@@ -7,6 +7,7 @@ import com.jiankun.mall.pojo.Admin;
 import com.jiankun.mall.pojo.query.AdminQuery;
 import com.jiankun.mall.service.IAdminService;
 import com.jiankun.mall.util.PageResult;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -70,5 +71,14 @@ public class AdminServiceImpl implements IAdminService {
     public Boolean register(Admin admin) {
         System.out.println(adminMapper.register(admin));
         return adminMapper.register(admin) > 0;
+    }
+
+    @Override
+    public Admin getLoginAdmin(HttpServletRequest request) {
+        Admin admin = (Admin) request.getSession().getAttribute("admin");
+        if (admin == null) {
+            admin = new Admin();
+        }
+        return admin;
     }
 }

@@ -6,6 +6,7 @@ import com.jiankun.mall.exception.JKException;
 import com.jiankun.mall.mapper.ProductMapper;
 import com.jiankun.mall.pojo.Product;
 import com.jiankun.mall.pojo.query.ProductQuery;
+import com.jiankun.mall.pojo.vo.ProductVO;
 import com.jiankun.mall.service.IProductService;
 import com.jiankun.mall.util.PageResult;
 import org.redisson.api.RedissonClient;
@@ -31,9 +32,9 @@ public class ProductServiceImpl implements IProductService {
     private RedissonClient redissonClient;
 
     @Override
-    public PageResult<Product> list(ProductQuery productQuery) {
+    public PageResult<ProductVO> list(ProductQuery productQuery) {
         PageHelper.startPage(productQuery.getPage(), productQuery.getLimit());
-        List<Product> list = productMapper.list(productQuery);
+        List<ProductVO> list = productMapper.list(productQuery);
         PageInfo pageInfo = new PageInfo(list);
         int count = (int) pageInfo.getTotal();
 //        if (count > 0) {

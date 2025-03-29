@@ -227,7 +227,7 @@
                 AND category_id = #{categoryId}
             </if>
             <if test="beginCreateTime!=null and endCreateTime!=null">
-                AND create_time BETWEEN #{beginCreateTime} AND #{endCreateTime}
+                AND p.create_time BETWEEN #{beginCreateTime} AND #{endCreateTime}
             </if>
         </where>
     </select>

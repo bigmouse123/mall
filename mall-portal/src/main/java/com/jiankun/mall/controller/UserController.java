@@ -1,5 +1,6 @@
 package com.jiankun.mall.controller;
 
+import com.jiankun.mall.pojo.Admin;
 import com.jiankun.mall.pojo.User;
 import com.jiankun.mall.service.IUserService;
 import com.jiankun.mall.util.Result;
@@ -26,6 +27,9 @@ public class UserController {
         if (user == null) {
             return Result.error("用户名或密码错误");
         }
+        if (user.getStatus() == 0) {
+            return Result.error("该用户被封禁");
+        }
         session.setAttribute("user", user);
         return Result.ok("登录成功");
     }
@@ -34,5 +38,19 @@ public class UserController {
     public Result logout(HttpSession session) {
         session.removeAttribute("user");
         return Result.ok("退出成功");
+    }
+
+    @RequestMapping("/register")
+    public Result register(User user, String passwordCheck) {
+        if (!passwordCheck.equals(user.getPassword())) {
+            return Result.error("两次密码不一致");
+        }
+        Boolean isRepeat = userService.register(user);
+        if (isRepeat) {
+            return Result.error("该用户名已存在");
+        } else {
+            userService.add(user);
+            return Result.ok("注册成功");
+        }
     }
 }

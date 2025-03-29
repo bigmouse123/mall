@@ -29,12 +29,12 @@ public class WebConfigurer implements WebMvcConfigurer {
         WebMvcConfigurer.super.addResourceHandlers(registry);
     }
 
-//    @Override
-//    public void addInterceptors(InterceptorRegistry registry) {
-//        registry.addInterceptor(new LoginInterceptor())
-//                .addPathPatterns("/**")
-//                .excludePathPatterns("/page/login", "/admin/login",
-//                        "/admin/logout", "/static/**", "/verifyCode",
-//                        "/admin/register", "/page/register", "/verifyCode/**", "/error");
-//    }
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new LoginInterceptor())
+                .addPathPatterns("/**")
+                .excludePathPatterns("/page/login", "/admin/login",
+                        "/admin/logout", "/static/**", "/verifyCode",
+                        "/admin/register", "/page/register", "/verifyCode/**", "/error");
+    }
 }

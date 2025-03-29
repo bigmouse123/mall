@@ -3,6 +3,7 @@ package com.jiankun.mall.service;
 import com.jiankun.mall.pojo.Admin;
 import com.jiankun.mall.pojo.query.AdminQuery;
 import com.jiankun.mall.util.PageResult;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * @author OfferKing
@@ -28,4 +29,6 @@ public interface IAdminService {
     Admin login(String name, String password);
 
     Boolean register(Admin admin);
+
+    Admin getLoginAdmin(HttpServletRequest request);
 }

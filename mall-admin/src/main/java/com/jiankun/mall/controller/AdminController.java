@@ -1,7 +1,9 @@
 package com.jiankun.mall.controller;
 
 import cn.hutool.extra.servlet.JakartaServletUtil;
+import com.jiankun.mall.annotation.AuthCheck;
 import com.jiankun.mall.annotation.MyLog;
+import com.jiankun.mall.constant.AdminConstant;
 import com.jiankun.mall.pojo.Admin;
 import com.jiankun.mall.pojo.LoginLog;
 import com.jiankun.mall.pojo.query.AdminQuery;
@@ -37,6 +39,7 @@ public class AdminController {
 
     @RequestMapping("/deleteById")
     @MyLog
+    @AuthCheck(mustRole = AdminConstant.SUPER_ADMIN_ROLE)
     public Result deleteById(Integer id) {
         adminService.deleteById(id);
         return Result.ok("删除成功");
@@ -44,12 +47,14 @@ public class AdminController {
 
     @RequestMapping("/deleteAll")
     @MyLog
+    @AuthCheck(mustRole = AdminConstant.SUPER_ADMIN_ROLE)
     public Result deleteAll(int[] ids) {
         adminService.deleteAll(ids);
         return Result.ok("删除成功");
     }
 
     @MyLog(module = "管理员模块")
+    @AuthCheck(mustRole = AdminConstant.SUPER_ADMIN_ROLE)
     @RequestMapping("/add")
     public Result add(Admin admin) {
         adminService.add(admin);
@@ -65,6 +70,7 @@ public class AdminController {
 
     @RequestMapping("/update")
     @MyLog
+    @AuthCheck(mustRole = AdminConstant.SUPER_ADMIN_ROLE)
     public Result update(Admin admin) {
         adminService.update(admin);
         return Result.ok("更新成功");
@@ -72,6 +78,7 @@ public class AdminController {
 
     @RequestMapping("/updateStatus")
     @MyLog
+    @AuthCheck(mustRole = AdminConstant.SUPER_ADMIN_ROLE)
     public Result updateStatus(Integer id, Integer status) {
         adminService.updateStatus(id, status);
         return Result.ok();
