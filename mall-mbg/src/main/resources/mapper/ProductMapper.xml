@@ -253,7 +253,12 @@
         group by p.category_id
     </select>
 
-<!--    <select id="listByCategoryId" resultType="com.jiankun.mall.pojo.Product">-->
+    <select id="getAllPrice" resultType="com.jiankun.mall.pojo.vo.ProductPriceVO">
+        select name, price as value
+        from product
+    </select>
+
+    <!--    <select id="listByCategoryId" resultType="com.jiankun.mall.pojo.Product">-->
 <!--        select *-->
 <!--        from product-->
 <!--        <where>-->

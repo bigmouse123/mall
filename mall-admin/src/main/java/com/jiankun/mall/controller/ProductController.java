@@ -2,6 +2,7 @@ package com.jiankun.mall.controller;
 
 import com.jiankun.mall.pojo.Category;
 import com.jiankun.mall.pojo.query.ProductQuery;
+import com.jiankun.mall.pojo.vo.ProductPriceVO;
 import com.jiankun.mall.pojo.vo.ProductVO;
 import com.jiankun.mall.service.ICategoryService;
 import com.jiankun.mall.service.IProductService;
@@ -79,6 +80,12 @@ public class ProductController {
     public Result updateStatus(Integer id, Integer status) {
         productService.updateStatus(id, status);
         return Result.ok();
+    }
+
+    @RequestMapping("/price")
+    public List<ProductPriceVO> getAllPrice() {
+        List<ProductPriceVO> list = productService.getAllPrice();
+        return list;
     }
 
 }

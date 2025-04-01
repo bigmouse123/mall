@@ -2,8 +2,11 @@ package com.jiankun.mall.service;
 
 import com.jiankun.mall.pojo.Product;
 import com.jiankun.mall.pojo.query.ProductQuery;
+import com.jiankun.mall.pojo.vo.ProductPriceVO;
 import com.jiankun.mall.pojo.vo.ProductVO;
 import com.jiankun.mall.util.PageResult;
+
+import java.util.List;
 
 /**
  * @author OfferKing
@@ -25,4 +28,6 @@ public interface IProductService {
     void update(Product product, String oldImage);
 
     void updateStatus(Integer id, Integer status);
+
+    List<ProductPriceVO> getAllPrice();
 }

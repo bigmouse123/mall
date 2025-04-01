@@ -3,6 +3,7 @@ package com.jiankun.mall.mapper;
 import com.jiankun.mall.pojo.Product;
 import com.jiankun.mall.pojo.query.ProductQuery;
 import com.jiankun.mall.pojo.vo.CategoryCountVO;
+import com.jiankun.mall.pojo.vo.ProductPriceVO;
 import com.jiankun.mall.pojo.vo.ProductVO;
 
 import java.util.List;
@@ -27,6 +28,8 @@ public interface ProductMapper {
     void updateStatus(Integer id, Integer status);
 
     List<CategoryCountVO> count();
+
+    List<ProductPriceVO> getAllPrice();
 
 //    List<Product> listByCategoryId(ProductQuery productQuery);
 }

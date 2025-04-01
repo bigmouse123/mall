@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.jiankun.mall.constant.RedisConstant;
 import com.jiankun.mall.pojo.query.ProductQuery;
+import com.jiankun.mall.pojo.vo.ProductPriceVO;
 import com.jiankun.mall.pojo.vo.ProductVO;
 import com.jiankun.mall.service.IProductService;
 import com.jiankun.mall.mapper.ProductMapper;
@@ -78,5 +79,10 @@ public class ProductServiceImpl implements IProductService {
     @Override
     public void updateStatus(Integer id, Integer status) {
         productMapper.updateStatus(id, status);
+    }
+
+    @Override
+    public List<ProductPriceVO> getAllPrice() {
+        return productMapper.getAllPrice();
     }
 }
