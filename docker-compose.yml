@@ -5,9 +5,9 @@ services:
     restart: always #崩溃后自动重启
     container_name: mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_ROOT_PASSWORD=ali12345678
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - ./.mysql-data:/var/lib/mysql #将数据目录挂载到本地目录以进行持久化   - ./.mysql-data:/var/lib/mysql
       - ./db:/docker-entrypoint-initdb.d #启动脚本               - ./db:/docker-entrypoint-initdb.d
@@ -46,6 +46,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - 8080:8080
+    depends_on:
+      - mysql
     networks:
       - mallnetwork
   mall-portal:
