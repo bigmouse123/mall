@@ -20,4 +20,6 @@ public interface OrderItemMapper {
     int updateByPrimaryKey(OrderItem record);
 
     List<OrderItemVO> list(OrderQuery orderQuery);
+
+    List<OrderItemVO> selectOrderItemByOrderNo(Long orderNo);
 }

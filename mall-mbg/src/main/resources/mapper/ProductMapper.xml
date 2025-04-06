@@ -229,6 +229,7 @@
             <if test="beginCreateTime!=null and endCreateTime!=null">
                 AND p.create_time BETWEEN #{beginCreateTime} AND #{endCreateTime}
             </if>
+            AND p.status = 1
         </where>
     </select>
 

@@ -18,6 +18,8 @@ public class OrderVO {
 
     private Integer userId;
 
+    private String userName;
+
     private Integer shippingId;
 
     private BigDecimal payment;

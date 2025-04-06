@@ -1,6 +1,7 @@
 package com.jiankun.mall.mapper;
 
 import com.jiankun.mall.pojo.Order;
+import com.jiankun.mall.pojo.query.OrderQuery;
 import com.jiankun.mall.pojo.vo.OrderVO;
 
 import java.util.List;
@@ -21,4 +22,6 @@ public interface OrderMapper {
     List<OrderVO> list(Integer userId);
 
     void updateStatus(Long orderNo, Integer status);
+
+    List<OrderVO> selectAll(OrderQuery orderQuery);
 }

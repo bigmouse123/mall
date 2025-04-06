@@ -229,6 +229,16 @@
         WHERE o.user_id = #{userId}
         ORDER BY create_time DESC
     </select>
+    <select id="selectAll" resultType="com.jiankun.mall.pojo.vo.OrderVO">
+        select o.*,u.name as user_name
+        from `order` as o inner join `user` as u
+        on o.user_id = u.id
+        <where>
+            <if test="beginCreateTime!=null and endCreateTime!=null">
+                and o.create_time between #{beginCreateTime} and #{endCreateTime}
+            </if>
+        </where>
+    </select>
     <update id="updateStatus">
         update `order`
         set status = #{status}

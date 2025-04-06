@@ -52,6 +52,7 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
+    @CacheEvict(value = "product", allEntries = true)
     public void add(Product product) {
         productMapper.insertSelective(product);
         redisTemplate.opsForSet().add(RedisConstant.UPLOAD_IMAGE_TO_DB, product.getMainImage());

@@ -3,45 +3,50 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jiankun.mall.mapper.OperLogMapper">
-  <!-- 插入操作日志 -->
-  <insert id="add" parameterType="OperLog" useGeneratedKeys="true" keyProperty="id">
-    INSERT INTO oper_log (id,
-                          module,
-                          log_type,
-                          admin_id,
-                          admin_name,
-                          request_method,
-                          request_uri,
-                          request_params,
-                          response_params,
-                          request_ip,
-                          server_address,
-                          is_exception,
-                          exception_msg,
-                          start_time,
-                          end_time,
-                          execute_time,
-                          user_agent,
-                          device_name,
-                          browser_name   )
-    VALUES (#{id},
-            #{module},
-            #{logType},
-            #{adminId},
-            #{adminName},
-            #{requestMethod},
-            #{requestUri},
-            #{requestParams},
-            #{responseParams},
-            #{requestIp},
-            #{serverAddress},
-            #{exception},
-            #{exceptionMsg},
-            #{startTime},
-            #{endTime},
-            #{executeTime},
-            #{userAgent},
-            #{deviceName},
-            #{browserName})
-  </insert>
+    <!-- 插入操作日志 -->
+    <insert id="add" parameterType="OperLog" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO oper_log (id,
+                              module,
+                              log_type,
+                              admin_id,
+                              admin_name,
+                              request_method,
+                              request_uri,
+                              request_params,
+                              response_params,
+                              request_ip,
+                              server_address,
+                              is_exception,
+                              exception_msg,
+                              start_time,
+                              end_time,
+                              execute_time,
+                              user_agent,
+                              device_name,
+                              browser_name)
+        VALUES (#{id},
+                #{module},
+                #{logType},
+                #{adminId},
+                #{adminName},
+                #{requestMethod},
+                #{requestUri},
+                #{requestParams},
+                #{responseParams},
+                #{requestIp},
+                #{serverAddress},
+                #{exception},
+                #{exceptionMsg},
+                #{startTime},
+                #{endTime},
+                #{executeTime},
+                #{userAgent},
+                #{deviceName},
+                #{browserName})
+    </insert>
+
+    <select id="list" resultType="com.jiankun.mall.pojo.OperLog">
+        select *
+        from oper_log
+    </select>
 </mapper>

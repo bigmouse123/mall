@@ -31,14 +31,14 @@ public class AdminController {
     private ILoginLogService loginLogService;
 
     @RequestMapping("/list")
-    @MyLog
+    @MyLog(module = "查看管理员")
     public PageResult<Admin> list(AdminQuery adminQuery) {
         PageResult<Admin> pageResult = adminService.list(adminQuery);
         return pageResult;
     }
 
     @RequestMapping("/deleteById")
-    @MyLog
+    @MyLog(module = "管理员删除")
     @AuthCheck(mustRole = AdminConstant.SUPER_ADMIN_ROLE)
     public Result deleteById(Integer id) {
         adminService.deleteById(id);
@@ -46,14 +46,14 @@ public class AdminController {
     }
 
     @RequestMapping("/deleteAll")
-    @MyLog
+    @MyLog(module = "管理员删除")
     @AuthCheck(mustRole = AdminConstant.SUPER_ADMIN_ROLE)
     public Result deleteAll(int[] ids) {
         adminService.deleteAll(ids);
         return Result.ok("删除成功");
     }
 
-    @MyLog(module = "管理员模块")
+    @MyLog(module = "管理员添加")
     @AuthCheck(mustRole = AdminConstant.SUPER_ADMIN_ROLE)
     @RequestMapping("/add")
     public Result add(Admin admin) {
@@ -69,7 +69,7 @@ public class AdminController {
     }
 
     @RequestMapping("/update")
-    @MyLog
+    @MyLog(module = "管理员更新")
     @AuthCheck(mustRole = AdminConstant.SUPER_ADMIN_ROLE)
     public Result update(Admin admin) {
         adminService.update(admin);
@@ -77,7 +77,7 @@ public class AdminController {
     }
 
     @RequestMapping("/updateStatus")
-    @MyLog
+    @MyLog(module = "管理员禁用/启用")
     @AuthCheck(mustRole = AdminConstant.SUPER_ADMIN_ROLE)
     public Result updateStatus(Integer id, Integer status) {
         adminService.updateStatus(id, status);
@@ -85,7 +85,7 @@ public class AdminController {
     }
 
     @RequestMapping("/login")
-    @MyLog
+    @MyLog(module = "管理员登录")
     public Result login(String name, String password, String code, HttpSession session, HttpServletRequest request) {
         Admin admin = adminService.login(name, password);
         String codeInSession = (String) session.getAttribute("codeInSession");
@@ -112,7 +112,7 @@ public class AdminController {
     }
 
     @RequestMapping("/logout")
-    @MyLog
+    @MyLog(module = "管理员注销")
     public Result logout(HttpSession session) {
         session.removeAttribute("admin");
         return Result.ok("退出成功");
@@ -132,7 +132,7 @@ public class AdminController {
     }
 
     @RequestMapping("/updatePassword")
-    @MyLog
+    @MyLog(module = "修改密码")
     public Result updatePassword(String oldPassword, String newPassword, HttpSession session) {
         Admin admin = (Admin) session.getAttribute("admin");
         if (!oldPassword.equals(admin.getPassword())) {

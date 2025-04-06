@@ -1,6 +1,10 @@
 package com.jiankun.mall.service;
 
 import com.jiankun.mall.pojo.OperLog;
+import com.jiankun.mall.pojo.query.OperLogQuery;
+import com.jiankun.mall.util.PageResult;
+
+import java.awt.*;
 
 /**
  * @author OfferKing
@@ -9,4 +13,6 @@ import com.jiankun.mall.pojo.OperLog;
  */
 public interface IOperLogService {
     public void add(OperLog operLog);
+
+    PageResult<OperLog> list(OperLogQuery operLogQuery);
 }

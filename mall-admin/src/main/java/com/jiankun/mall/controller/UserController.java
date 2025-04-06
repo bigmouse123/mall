@@ -1,6 +1,7 @@
 package com.jiankun.mall.controller;
 
 import com.jiankun.mall.annotation.AuthCheck;
+import com.jiankun.mall.annotation.MyLog;
 import com.jiankun.mall.constant.AdminConstant;
 import com.jiankun.mall.pojo.User;
 import com.jiankun.mall.pojo.query.UserQuery;
@@ -29,18 +30,21 @@ public class UserController {
         return pageResult;
     }
 
+    @MyLog(module = "用户删除")
     @RequestMapping("/deleteById")
     public Result deleteById(Integer id) {
         userService.deleteById(id);
         return Result.ok("删除成功");
     }
 
+    @MyLog(module = "用户删除")
     @RequestMapping("/deleteAll")
     public Result deleteAll(int[] ids) {
         userService.deleteAll(ids);
         return Result.ok("删除成功");
     }
 
+    @MyLog(module = "用户添加")
     @RequestMapping("/add")
     public Result add(User user) {
         userService.add(user);
@@ -53,12 +57,14 @@ public class UserController {
         return Result.ok(user);
     }
 
+    @MyLog(module = "用户更新")
     @RequestMapping("/update")
     public Result update(User user) {
         userService.update(user);
         return Result.ok("更新成功");
     }
 
+    @MyLog(module = "用户禁用/解禁")
     @RequestMapping("/updateStatus")
     public Result updateStatus(Integer id, Integer status) {
         userService.updateStatus(id, status);

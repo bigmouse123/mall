@@ -1,5 +1,6 @@
 package com.jiankun.mall.controller;
 
+import com.jiankun.mall.annotation.MyLog;
 import com.jiankun.mall.pojo.Category;
 import com.jiankun.mall.pojo.query.CategoryQuery;
 import com.jiankun.mall.service.ICategoryService;
@@ -47,18 +48,21 @@ public class CategoryController {
         return pageResult;
     }
 
+    @MyLog(module = "分类添加")
     @RequestMapping("/add")
     public Result add(Category category) {
         categoryService.add(category);
         return Result.ok("添加成功");
     }
 
+    @MyLog(module = "分类删除")
     @RequestMapping("/deleteById")
     public Result deleteById(Integer id) {
         categoryService.deleteById(id);
         return Result.ok("删除成功");
     }
 
+    @MyLog(module = "分类删除")
     @RequestMapping("/deleteAll")
     public Result deleteAll(int[] ids) {
         categoryService.deleteAll(ids);

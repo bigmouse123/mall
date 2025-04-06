@@ -201,4 +201,8 @@
             </if>
         </where>
     </select>
+    <select id="selectOrderItemByOrderNo" resultType="com.jiankun.mall.pojo.vo.OrderItemVO">
+        select * from order_item
+        where order_no = #{orderNo}
+    </select>
 </mapper>

@@ -1,5 +1,6 @@
 package com.jiankun.mall.controller;
 
+import com.jiankun.mall.annotation.MyLog;
 import com.jiankun.mall.pojo.Category;
 import com.jiankun.mall.pojo.query.ProductQuery;
 import com.jiankun.mall.pojo.vo.ProductPriceVO;
@@ -37,12 +38,14 @@ public class ProductController {
         return pageResult;
     }
 
+    @MyLog(module = "产品删除")
     @RequestMapping("/deleteById")
     public Result deleteById(Integer id) {
         productService.deleteById(id);
         return Result.ok("删除成功");
     }
 
+    @MyLog(module = "产品删除")
     @RequestMapping("/deleteAll")
     public Result deleteAll(int[] ids) {
         productService.deleteAll(ids);
@@ -50,6 +53,7 @@ public class ProductController {
     }
 
     @RequestMapping("/add")
+    @MyLog(module = "产品添加")
     public Result add(Product product) {
         productService.add(product);
         return Result.ok("添加成功");
@@ -69,6 +73,7 @@ public class ProductController {
         return Result.ok(map);
     }
 
+    @MyLog(module = "产品更新")
     @RequestMapping("/update")
     public Result update(Product product, HttpServletRequest request) {
         String oldImage = request.getParameter("oldImage");
@@ -76,6 +81,7 @@ public class ProductController {
         return Result.ok("更新成功");
     }
 
+    @MyLog(module = "产品上架/下架")
     @RequestMapping("/updateStatus")
     public Result updateStatus(Integer id, Integer status) {
         productService.updateStatus(id, status);

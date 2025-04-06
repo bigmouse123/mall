@@ -1,4 +1,4 @@
-package com.jiankun.mall.config;
+package com.jiankun.mall.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;

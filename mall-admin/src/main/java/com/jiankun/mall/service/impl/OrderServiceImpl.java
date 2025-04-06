@@ -3,9 +3,11 @@ package com.jiankun.mall.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.jiankun.mall.mapper.OrderItemMapper;
+import com.jiankun.mall.mapper.OrderMapper;
 import com.jiankun.mall.pojo.OrderItem;
 import com.jiankun.mall.pojo.query.OrderQuery;
 import com.jiankun.mall.pojo.vo.OrderItemVO;
+import com.jiankun.mall.pojo.vo.OrderVO;
 import com.jiankun.mall.service.IOrderService;
 import com.jiankun.mall.util.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +24,13 @@ import java.util.List;
 public class OrderServiceImpl implements IOrderService {
 
     @Autowired
-    private OrderItemMapper orderItemMapper;
+    private OrderMapper orderMapper;
 
     @Override
-    public PageResult<OrderItemVO> list(OrderQuery orderQuery) {
+    public PageResult<OrderVO> selectAll(OrderQuery orderQuery) {
         PageHelper.startPage(orderQuery.getPage(), orderQuery.getLimit());
-        List<OrderItemVO> list = orderItemMapper.list(orderQuery);
-        PageInfo<OrderItemVO> pageInfo = new PageInfo<>(list);
+        List<OrderVO> list = orderMapper.selectAll(orderQuery);
+        PageInfo<OrderVO> pageInfo = new PageInfo<>(list);
         int count = (int) pageInfo.getTotal();
         return new PageResult<>(0, "", count, list);
     }

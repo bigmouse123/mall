@@ -1,137 +1,162 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
-    <title>主页</title>
-    <link rel="stylesheet" type="text/css" href="/static/layui/css/layui.css"/>
-    <script src="/static/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/static/mylayer.js" type="text/javascript" charset="utf-8"></script>
+	<title>主页</title>
+	<style>
+		.layui-side {
+			background-image: url('/static/images/index.jpg');
+			background-size: cover; /* 背景图像填充整个侧边栏 */
+			background-position: center center; /* 背景图像居中 */
+			background-attachment: fixed; /* 背景图片固定不随页面滚动 */
+		}
+
+		.layui-side-scroll {
+			opacity: 0.7;
+		}
+
+		.layui-header {
+			background-image: url('/static/images/index.jpg'); /* 替换为你的图片路径 */
+			background-size: cover; /* 图片覆盖整个容器 */
+			background-position: center; /* 背景图片居中 */
+		}
+
+		.layui-layout-right {
+			opacity: 1;
+		}
+
+		/*.layui-body {*/
+		/*	background-image: url('/static/images/index.jpg');*/
+		/*	background-size: cover; !* 背景图像填充整个侧边栏 *!*/
+		/*	background-position: center center; !* 背景图像居中 *!*/
+		/*	background-attachment: fixed; !* 背景图片固定不随页面滚动 *!*/
+		/*	opacity: 0.5;*/
+		/*}*/
+	</style>
+
+	<link rel="stylesheet" type="text/css" href="/static/layui/css/layui.css"/>
+	<script src="/static/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/static/mylayer.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body class="layui-layout-body">
-<div class="layui-layout layui-layout-admin">
-    <div class="layui-header">
-        <div class="layui-logo">JAVA-0000</div>
-        <ul class="layui-nav layui-layout-left"></ul>
-        <ul class="layui-nav layui-layout-right">
-            <li class="layui-nav-item">
-                <a href="javascript:;">
-                    <img width="40px" height="30px" src="/pic/${admin.image}"/>
-                    <span th:text="${session.admin?.name}"></span>
-                </a>
-                <dl class="layui-nav-child">
-                    <dd>
-                        <a href="javascript:openUser()">基本资料</a>
-                    </dd>
-                    <dd>
-                        <a href="javascript:openPass()">修改密码</a>
-                    </dd>
-                    <dd>
-                        <a href="javascript:openPic()">修改头像</a>
-                    </dd>
-                </dl>
-            </li>
-            <li class="layui-nav-item">
-                <a href="javascript:logout()">注销</a>
-            </li>
-        </ul>
-    </div>
-    <div class="layui-side layui-bg-black">
-        <div class="layui-side-scroll">
-            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-            <ul class="layui-nav layui-nav-tree">
-                <li class="layui-nav-item layui-nav-itemed">
-                    <a href="javascript:;">信息维护</a>
-                    <dl class="layui-nav-child">
-                        <dd>
-                            <a href="javascript:;"
-                               data-url="/page/admin/list"
-                               class="site-demo-active">管理员管理</a>
-                        </dd>
-                        <dd>
-                        <dd>
-                            <a href="javascript:;"
-                               data-url="/page/product/list"
-                               class="site-demo-active">商品管理</a>
-                        </dd>
-                        <dd>
-                            <a href="javascript:;"
-                               data-url="/page/category/list"
-                               class="site-demo-active">分类管理</a>
-                        </dd>
-                        <dd>
-                            <a href="javascript:;"
-                               data-url="/page/user/list"
-                               class="site-demo-active">用户管理</a>
-                        </dd>
-                        <dd>
-                            <a href="javascript:;"
-                               data-url="/page/order/list"
-                               class="site-demo-active">订单管理</a>
-                        </dd>
-                        <dd>
-                            <a href="javascript:;"
-                               data-url="/page/echarts"
-                               class="site-demo-active">数量图表</a>
-                        </dd>
-                        <dd>
-                            <a href="javascript:;"
-                               data-url="/page/price/echarts"
-                               class="site-demo-active">价格图表</a>
-                        </dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;">基础配置</a>
-                    <dl class="layui-nav-child">
-                        <dd>
-                            <a href="javascript:;"
-                               class="site-demo-active"
-                               data-url="/com.easy.web/page/dict/dictlist.jsp">
-                                基础数据维护</a>
-                        </dd>
-                        <dd>
-                            <a href="javascript:;" class="site-demo-active"
-                               data-url="/com.easy.web/404.jsp">404-1</a>
-                        </dd>
-                    </dl>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="layui-body"><!-- 内容主体区域 -->
-        <iframe name="rightframe" width="99%" height="97%" src="/page/echarts"></iframe>
-    </div>
-    <div class="layui-footer">© JAVA - 底部固定区域</div>
-</div>
-<script type="text/javascript">
-    var $ = layui.jquery;
-    var layer = layui.layer;
-    var element = layui.element;
-    $('.site-demo-active').click(function () {
-        window.open($(this).data('url'), "rightframe");
-    });
-    element.render();// element.init();
-    function openURL(url) {
-        window.open(url, "rightframe");
-    }
+	<div class="layui-layout layui-layout-admin">
+		<div class="layui-header">
+			<div class="layui-logo">购物商城后台管理系统</div>
+			<ul class="layui-nav layui-layout-left"></ul>
+			<ul class="layui-nav layui-layout-right">
+				<li class="layui-nav-item">
+					<a href="javascript:;">
+						<img width="40px" height="30px" src="/static/images/img.png"/>
+						<span style="color: black" th:text="${session.admin?.name}"></span>
+					</a>
+					<dl class="layui-nav-child">
+						<dd>
+							<a href="javascript:openUser()">基本资料</a>
+						</dd>
+						<dd>
+							<a href="javascript:openPass()">修改密码</a>
+						</dd>
+						<dd>
+							<a href="javascript:openPic()">修改头像</a>
+						</dd>
+					</dl>
+				</li>
+				<li class="layui-nav-item">
+					<a style="color: black" href="javascript:logout()">注销</a>
+				</li>
+			</ul>
+		</div>
+		<div class="layui-side layui-bg-black">
+			<div class="layui-side-scroll">
+				<!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+				<ul class="layui-nav layui-nav-tree">
+					<li class="layui-nav-item layui-nav-itemed">
+						<a href="javascript:;">信息管理</a>
+						<dl class="layui-nav-child">
+							<dd>
+								<a href="javascript:;"
+								   data-url="/page/admin/list"
+								   class="site-demo-active">管理员管理</a>
+							</dd>
+							<dd>
+								<a href="javascript:;"
+								   data-url="/page/category/list"
+								   class="site-demo-active">分类管理</a>
+							</dd>
+							<dd>
+								<a href="javascript:;"
+								   data-url="/page/product/list"
+								   class="site-demo-active">商品管理</a>
+							</dd>
+							<dd>
+								<a href="javascript:;"
+								   data-url="/page/user/list"
+								   class="site-demo-active">用户管理</a>
+							</dd>
+							<dd>
+								<a href="javascript:;"
+								   data-url="/page/order/list"
+								   class="site-demo-active">订单管理</a>
+							</dd>
+							<dd>
+								<a href="javascript:;"
+								   data-url="/page/operlog/list"
+								   class="site-demo-active">操作日志管理</a>
+							</dd>
+						</dl>
+					</li>
+					<li class="layui-nav-item">
+						<a href="javascript:;">统计图表</a>
+						<dl class="layui-nav-child">
+							<dd>
+								<a href="javascript:;"
+								   data-url="/page/echarts"
+								   class="site-demo-active">数量图表</a>
+							</dd>
+							<dd>
+								<a href="javascript:;"
+								   data-url="/page/price/echarts"
+								   class="site-demo-active">价格图表</a>
+							</dd>
+						</dl>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="layui-body"><!-- 内容主体区域 -->
+			<iframe name="rightframe" width="99%" height="97%" src="/page/echarts"></iframe>
+		</div>
+		<div class="layui-footer">© JAVA - 底部固定区域</div>
+	</div>
+	<script type="text/javascript">
+		var $ = layui.jquery;
+		var layer = layui.layer;
+		var element = layui.element;
+		$('.site-demo-active').click(function () {
+			window.open($(this).data('url'), "rightframe");
+		});
+		element.render();// element.init();
+		function openURL(url) {
+			window.open(url, "rightframe");
+		}
 
-    function logout() {
-        layer.confirm('您确认要退出么?', {icon: 3}, function () {
-            $.post(
-                '/admin/logout',
-                function (result) {
-                    if (result.code == 0) {
-                        mylayer.okUrl(result.msg, '/page/login')
-                    }
-                },
-                'json'
-            );
-        })
-    }
+		function logout() {
+			layer.confirm('您确认要退出么?', {icon: 3}, function () {
+				$.post(
+						'/admin/logout',
+						function (result) {
+							if (result.code == 0) {
+								mylayer.okUrl(result.msg, '/page/login')
+							}
+						},
+						'json'
+				);
+			})
+		}
 
-    function openPass() {
-        location.href = "/page/password/update"
-    }
+		function openPass() {
+			location.href = "/page/password/update"
+		}
 
-</script>
+	</script>
 </body>
 </html>

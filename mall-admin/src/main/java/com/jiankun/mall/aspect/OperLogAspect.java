@@ -9,6 +9,7 @@ import cn.hutool.http.useragent.UserAgent;
 import cn.hutool.http.useragent.UserAgentUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jiankun.mall.annotation.MyLog;
 import com.jiankun.mall.pojo.Admin;
 import com.jiankun.mall.pojo.OperLog;
 import com.jiankun.mall.service.IOperLogService;
@@ -78,12 +79,17 @@ public class OperLogAspect {
      * @param joinPoint
      * @throws Throwable
      */
-    @Before(value = "operLogAspect()")
-    public void doBefore(JoinPoint joinPoint) throws Throwable {
+//    @Before(value = "operLogAspect()")
+    @Before("@annotation(myLog)")
+    public void doBefore(JoinPoint joinPoint, MyLog myLog) throws Throwable {
         HttpServletRequest request = ((ServletRequestAttributes) Objects
                 .requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
 
+        // 获取 @MyLog 注解的参数
+        String module = myLog.module();
+        // 构建 OperLog 对象
         OperLog operLog = new OperLog();
+        operLog.setModule(module);
         HttpSession session = request.getSession();
         Admin admin = (Admin) session.getAttribute("admin");
         if (admin != null) {
@@ -112,9 +118,13 @@ public class OperLogAspect {
      *
      * @param ret
      */
-    @AfterReturning(pointcut = "operLogAspect()", returning = "ret")
-    public void doAfterReturning(Object ret) {
+//    @AfterReturning(pointcut = "operLogAspect()", returning = "ret")
+    @AfterReturning(value = "@annotation(myLog)", returning = "ret")
+    public void doAfterReturning(Object ret, MyLog myLog) {
+        // 获取 @MyLog 注解的参数
+        String module = myLog.module();
         OperLog operLog = operLogThreadLocal.get();
+        operLog.setModule(module);
         operLog.setLogType(LOG_INFO);
         operLog.setEndTime(new Date());
         operLog.setExecuteTime(Long.valueOf(ChronoUnit.MILLIS.between(LocalDateTime.ofInstant(operLog.getStartTime().toInstant(), ZoneId.systemDefault()),
@@ -152,9 +162,13 @@ public class OperLogAspect {
      *
      * @param e
      */
-    @AfterThrowing(pointcut = "operLogAspect()", throwing = "e")
-    public void doAfterThrowable(Throwable e) {
+//    @AfterThrowing(pointcut = "operLogAspect()", throwing = "e")
+    @AfterThrowing(value = "@annotation(myLog)", throwing = "e")
+    public void doAfterThrowable(Throwable e, MyLog myLog) {
+        // 获取 @MyLog 注解的参数
+        String module = myLog.module();
         OperLog operLog = operLogThreadLocal.get();
+        operLog.setModule(module);
         operLog.setLogType(LOG_ERROR);
         operLog.setEndTime(new Date());
         //operLog.setExecuteTime(Long.valueOf(ChronoUnit.MINUTES.between(operLog.getStartTime(), operLog.getEndTime())));
