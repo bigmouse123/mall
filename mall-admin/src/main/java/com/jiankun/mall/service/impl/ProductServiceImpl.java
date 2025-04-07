@@ -4,7 +4,9 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.jiankun.mall.constant.RedisConstant;
 import com.jiankun.mall.pojo.query.ProductQuery;
+import com.jiankun.mall.pojo.query.SalesQuery;
 import com.jiankun.mall.pojo.vo.ProductPriceVO;
+import com.jiankun.mall.pojo.vo.ProductSalesVO;
 import com.jiankun.mall.pojo.vo.ProductVO;
 import com.jiankun.mall.service.IProductService;
 import com.jiankun.mall.mapper.ProductMapper;
@@ -85,5 +87,10 @@ public class ProductServiceImpl implements IProductService {
     @Override
     public List<ProductPriceVO> getAllPrice() {
         return productMapper.getAllPrice();
+    }
+
+    @Override
+    public List<ProductSalesVO> getAllSales(SalesQuery salesQuery) {
+        return productMapper.getAllSales(salesQuery);
     }
 }

@@ -2,7 +2,9 @@ package com.jiankun.mall.service;
 
 import com.jiankun.mall.pojo.Product;
 import com.jiankun.mall.pojo.query.ProductQuery;
+import com.jiankun.mall.pojo.query.SalesQuery;
 import com.jiankun.mall.pojo.vo.ProductPriceVO;
+import com.jiankun.mall.pojo.vo.ProductSalesVO;
 import com.jiankun.mall.pojo.vo.ProductVO;
 import com.jiankun.mall.util.PageResult;
 
@@ -30,4 +32,6 @@ public interface IProductService {
     void updateStatus(Integer id, Integer status);
 
     List<ProductPriceVO> getAllPrice();
+
+    List<ProductSalesVO> getAllSales(SalesQuery salesQuery);
 }

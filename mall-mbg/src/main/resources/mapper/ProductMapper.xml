@@ -258,6 +258,17 @@
         select name, price as value
         from product
     </select>
+    <select id="getAllSales" resultType="com.jiankun.mall.pojo.vo.ProductSalesVO">
+        select p.name, sum(oi.quantity) as value
+        from product as p inner join order_item as oi
+        on p.id = oi.product_id
+        <where>
+            <if test="beginCreateTime!=null and endCreateTime!=null">
+                AND oi.create_time BETWEEN #{beginCreateTime} AND #{endCreateTime}
+            </if>
+        </where>
+        group by p.name
+    </select>
 
     <!--    <select id="listByCategoryId" resultType="com.jiankun.mall.pojo.Product">-->
 <!--        select *-->

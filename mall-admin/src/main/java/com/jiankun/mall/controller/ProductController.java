@@ -3,7 +3,9 @@ package com.jiankun.mall.controller;
 import com.jiankun.mall.annotation.MyLog;
 import com.jiankun.mall.pojo.Category;
 import com.jiankun.mall.pojo.query.ProductQuery;
+import com.jiankun.mall.pojo.query.SalesQuery;
 import com.jiankun.mall.pojo.vo.ProductPriceVO;
+import com.jiankun.mall.pojo.vo.ProductSalesVO;
 import com.jiankun.mall.pojo.vo.ProductVO;
 import com.jiankun.mall.service.ICategoryService;
 import com.jiankun.mall.service.IProductService;
@@ -91,6 +93,12 @@ public class ProductController {
     @RequestMapping("/price")
     public List<ProductPriceVO> getAllPrice() {
         List<ProductPriceVO> list = productService.getAllPrice();
+        return list;
+    }
+
+    @RequestMapping("/sales")
+    public List<ProductSalesVO> getAllSales(SalesQuery salesQuery) {
+        List<ProductSalesVO> list = productService.getAllSales(salesQuery);
         return list;
     }
 
