@@ -91,5 +91,15 @@
         <!--<table schema="" tableName="order"  enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false"></table>-->
+
+        <table schema="" tableName="tm_province" domainObjectName="Province"  enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"></table>
+        <table schema="" tableName="tm_city" domainObjectName="City"  enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"></table>
+        <table schema="" tableName="tm_area" domainObjectName="Area"  enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"></table>
     </context>
 </generatorConfiguration>

@@ -39,7 +39,7 @@
 
 	<script type="text/html" id="toolDemo">
 		<div class="layui-clear-space">
-			<a class="layui-btn layui-btn-xs layui-btn-primary" lay-event="content">详情</a>
+			<a class="layui-btn layui-btn-xs" lay-event="content">详情</a>
 		</div>
 	</script>
 
@@ -99,9 +99,18 @@
 									templet: function (d) {
 										var paymentTypeMap = ['货到付款', '微信', '支付宝', '银联'];
 										return paymentTypeMap[d.paymentType] || '未知';
-									}
+									},
 								},
 								{field: 'postage', title: '运费'},
+								{
+									field: 'status',
+									title: '状态',
+									templet: function (d) {
+										//订单状态:0-已取消-1-未付款，2-已付款，3-已发货，4-交易成功，5-交易关闭
+										var statusMap = ['已取消', '未付款', '已发货', '交易成功', '交易关闭'];
+										return statusMap[d.status] || '未知';
+									}
+								},
 								// {field: 'paymentTime', title: '支付时间'},
 								// {field: 'sendTime', title: '发货时间'},
 								// {field: 'endTime', title: '交易完成时间'},

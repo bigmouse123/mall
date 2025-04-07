@@ -1,5 +1,8 @@
 package com.jiankun.mall.service;
 
+import com.jiankun.mall.pojo.Area;
+import com.jiankun.mall.pojo.City;
+import com.jiankun.mall.pojo.Province;
 import com.jiankun.mall.pojo.Shipping;
 
 import java.util.List;
@@ -11,4 +14,14 @@ import java.util.List;
  */
 public interface IShippingService {
     List<Shipping> list(Integer userId);
+
+    List<Province> selectProvince();
+
+    List<City> selectCity(Integer provinceId);
+
+    List<Area> selectArea(Integer cityId);
+
+    void add(Shipping shipping);
+
+    void delete(Integer id);
 }
