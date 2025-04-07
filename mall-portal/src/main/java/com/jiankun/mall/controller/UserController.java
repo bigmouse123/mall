@@ -1,6 +1,5 @@
 package com.jiankun.mall.controller;
 
-import com.jiankun.mall.pojo.Admin;
 import com.jiankun.mall.pojo.User;
 import com.jiankun.mall.service.IUserService;
 import com.jiankun.mall.util.Result;
@@ -52,5 +51,28 @@ public class UserController {
             userService.add(user);
             return Result.ok("注册成功");
         }
+    }
+
+    @RequestMapping("/resetPassword")
+    public Result resetPassword(String oldPassword, String newPassword, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (!user.getPassword().equals(oldPassword)) {
+            return Result.error("密码错误");
+        }
+        user.setPassword(newPassword);
+        userService.update(user);
+        return Result.ok("更新成功");
+    }
+
+    @RequestMapping("/update")
+    public Result update(User user) {
+        userService.update(user);
+        return Result.ok("更新成功");
+    }
+
+    @RequestMapping("/selectById")
+    public Result selectById(Integer id) {
+        User user = userService.selectById(id);
+        return Result.ok(user);
     }
 }

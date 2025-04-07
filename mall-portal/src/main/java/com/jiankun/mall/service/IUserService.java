@@ -14,4 +14,8 @@ public interface IUserService {
     Boolean register(User user);
 
     void add(User user);
+
+    void update(User user);
+
+    User selectById(Integer id);
 }

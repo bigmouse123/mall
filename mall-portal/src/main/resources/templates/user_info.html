@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org/">
 <head>
 	<title>我的订单—小米商城</title>
 	<meta charset="utf-8">
@@ -238,7 +238,7 @@
 					<div class="order_left">
 						<ul>
 							<li class="box">订单中心</li>
-							<li class="min">我的订单</li>
+							<li class="min"><a href="/page/order/list">我的订单</a></li>
 							<li class="min">意外保</li>
 							<li class="min">团购订单</li>
 							<li class="min">评价晒单</li>
@@ -246,7 +246,7 @@
 							<li class="min">以旧换新订单</li>
 
 							<li class="box">个人中心</li>
-							<li class="min"><a href="/page/user/info">我的个人中心</a></li>
+							<li class="min">我的个人中心</li>
 							<li class="min">消息通知</li>
 							<li class="min">购买资格</li>
 							<li class="min">现金账户</li>
@@ -268,43 +268,67 @@
 						</ul>
 					</div>
 					<div class="order_right" id="orderList">
-						<p>我的订单<span style="font-size:13px;">&nbsp;&nbsp;  请谨防钓鱼链接或诈骗电话，了解更多></span>
-						</p>
-						<div class="order_right_form">
-							<ul>
-								<li id="regTabs_0" onclick="ChangeReg('0','register_',1)">全部有效订单<span></span></li>
-								<li id="regTabs_1" onclick="ChangeReg('1','register_',1)">待支付<span></span></li>
-								<li>待收货<span></span></li>
-								<li>已关闭</li>
-							</ul>
-							<form>
-								<input type="text" name="" placeholder="输入商品名称 商品编号 订单号">
-								<div class="botton"><i class=" fa fa-search"></i></div>
-							</form>
-							<div class="clear"></div>
-						</div>
-						<!--                    <div class="order_right_show" id="register_0" style="display:block">-->
-						<!--                        <div class="order_right_content">-->
-						<!--                            <h2>已收货</h2>-->
-						<!--                            <p>2016年09月02日 10：00 | XXX | 订单号： 1234455513234 |在线支付 <span>订单金额：<b> 149</b> 元 </span>-->
-						<!--                            </p>-->
-						<!--                            <div class="order_right_shop">-->
-						<!--                                <img src="/static/img/life4.png">-->
-						<!--                                <p>家居沙发 灰色 <br>356元 X 1</p>-->
-
-						<!--                                <div class="order_right_div">-->
-						<!--                                    <p>订单详情</p>-->
-						<!--                                    <p>售后详情</p>-->
-						<!--                                </div>-->
-						<!--                                <div class="clear"></div>-->
-						<!--                            </div>-->
-						<!--                        </div>-->
-						<!--                        <div class="clear"></div>-->
-						<!--                    </div>-->
-						<div class="order_right_show" id="register_1" style="display:none">
-							<p>当前没有待支付订单。</p>
-						</div>
-
+						<form class="layui-form layui-form-pane" action="">
+							<div class="layui-form-item">
+								<label class="layui-form-label">原密码</label>
+								<div class="layui-input-inline">
+									<input type="password" name="oldPassword" autocomplete="off" placeholder="请输入"
+										   lay-verify="required|passwordRule"
+										   class="layui-input">
+								</div>
+							</div>
+							<div class="layui-form-item">
+								<label class="layui-form-label">新密码</label>
+								<div class="layui-input-inline">
+									<input type="password" lay-verify="required|passwordRule" name="newPassword"
+										   autocomplete="off" placeholder="请输入"
+										   class="layui-input">
+								</div>
+							</div>
+							<div class="layui-form-item">
+								<label class="layui-form-label">确认新密码</label>
+								<div class="layui-input-inline">
+									<input type="password" lay-verify="required|confirmNewPassword"
+										   name="confirmNewPassword" autocomplete="off" placeholder="请输入"
+										   class="layui-input">
+								</div>
+							</div>
+							<div class="layui-form-item">
+								<div class="layui-input-inline">
+									<button type="submit" class="layui-btn" lay-submit lay-filter="submitForm">
+										立即提交
+									</button>
+									<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+								</div>
+							</div>
+						</form>
+						<form class="layui-form layui-form-pane" lay-filter="formFilter" action="">
+							<input type="hidden" name="id" id="userId" th:value="${session.user?.id}">
+							<div class="layui-form-item">
+								<label class="layui-form-label">邮箱</label>
+								<div class="layui-input-inline">
+									<input type="text" name="email" autocomplete="off" placeholder="请输入"
+										   lay-verify="required|email"
+										   class="layui-input">
+								</div>
+							</div>
+							<div class="layui-form-item">
+								<label class="layui-form-label">电话</label>
+								<div class="layui-input-inline">
+									<input type="text" lay-verify="required|phone" name="phone"
+										   autocomplete="off" placeholder="请输入"
+										   class="layui-input">
+								</div>
+							</div>
+							<div class="layui-form-item">
+								<div class="layui-input-inline">
+									<button type="submit" class="layui-btn" lay-submit lay-filter="submitForm2">
+										立即提交
+									</button>
+									<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+								</div>
+							</div>
+						</form>
 					</div>
 					<div class="clear"></div>
 				</div>
@@ -417,47 +441,83 @@
 			</div>
 		</div>
 		<script type="text/javascript">
-			$(function () {
+
+			var userId = document.getElementById('userId').value;
+
+			layui.use(['form', 'upload'], function () {
+				var form = layui.form;
+				var upload = layui.upload;
+				var layer = layui.layer;
+
 				$.post(
-						'/order/list',
+						'/user/selectById',
+						{'id': userId},
 						function (result) {
-							console.log(result);
-							var html = '';
-							$(result.data).each(function () {
-								html += '<div class="order_right_show" id="register_0" style="display:block">';
-								html += '    <div class="order_right_content">';
-								if (this.status == 0) {
-									html += '        <h2>已取消</h2>'
-								} else if (this.status == 1) {
-									html += '        <h2>未支付</h2>'
-								} else if (this.status == 2) {
-									html += '        <h2>已支付</h2>'
-								} else if (this.status == 3) {
-									html += '        <h2>已发货</h2>'
-								} else if (this.status == 4) {
-									html += '        <h2>交易成功</h2>'
-								}
-								html += '        <p>' + this.createTime + ' | XXX | 订单号： ' + this.orderNo + ' |' + this.paymentType + ' <span>订单金额：<b> ' + this.payment + '</b> 元 </span>';
-								html += '        </p>';
-								$(this.list).each(function () {
-									html += '        <div class="order_right_shop">';
-									html += '            <img width="80px" height="80px" src="' + this.productImage + '">';
-									html += '                <p>' + this.productName + ' <br>' + this.currentUnitPrice + '元 X ' + this.quantity + '</p>';
-									html += '                <div class="order_right_div">';
-									html += '                    <p>' + this.totalPrice + '元</p>';
-									html += '                </div>';
-									html += '                <div class="clear"></div>';
-									html += '        </div>';
-								})
-								html += '    </div>';
-								html += '    <div class="clear"></div>';
-								html += '</div>';
-							})
-							$('#orderList').append(html);
+							if (result.code === 0) {
+								var user = result.data;
+								form.val('formFilter', user);
+							}
 						},
 						'json'
-				);
-			})
+				)
+
+				// 自定义验证规则
+				form.verify({
+					passwordRule: function (value) {
+						var regex = /^[A-Za-z0-9]{4,12}$/;
+						if (!regex.test(value)) {
+							return '密码格式：4-12位字母+数字组合';
+						}
+					},
+					confirmNewPassword: function (value) {
+						var newPass = $('input[name="newPassword"]').val();
+						if (newPass !== value) {
+							return '密码不一致，请检查输入';
+						}
+					}
+				});
+
+				// 提交事件 layui
+				form.on('submit(submitForm)', function (data) {
+					var field = data.field; // 获取表单字段值  password   newPassword
+					$.post(
+							'/user/resetPassword',
+							field,
+							function (result) {
+								console.log(result);
+								if (result.code == 0) {
+									mylayer.okUrl(result.msg, '/page/login?requestURI=/');
+								} else {
+									mylayer.errorMsg(result.msg);
+								}
+							},
+							'json'
+					);
+
+					return false; // 阻止默认 form 跳转
+				});
+
+				form.on('submit(submitForm2)', function (data) {
+					var field = data.field; // 获取表单字段值  password   newPassword
+					$.post(
+							'/user/update',
+							field,
+							function (result) {
+								console.log(result);
+								if (result.code == 0) {
+									mylayer.okMsg(result.msg);
+								} else {
+									mylayer.errorMsg(result.msg);
+								}
+							},
+							'json'
+					);
+
+					return false; // 阻止默认 form 跳转
+				});
+
+			});
+
 
 			function ChangeReg(divId, divName, Count) {
 				for (var i = 0; i <= Count; i++) {
@@ -474,5 +534,6 @@
 				}
 			}
 		</script>
+	</div>
 </body>
 </html>

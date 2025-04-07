@@ -31,4 +31,14 @@ public class UserServiceImpl implements IUserService {
     public void add(User user) {
         userMapper.insertSelective(user);
     }
+
+    @Override
+    public void update(User user) {
+        userMapper.updateByPrimaryKeySelective(user);
+    }
+
+    @Override
+    public User selectById(Integer id) {
+        return userMapper.selectByPrimaryKey(id);
+    }
 }
