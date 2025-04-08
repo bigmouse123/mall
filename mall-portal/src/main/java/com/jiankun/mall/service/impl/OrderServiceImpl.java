@@ -97,4 +97,9 @@ public class OrderServiceImpl implements IOrderService {
     public void updateStatus(Long orderNo, Integer status) {
         orderMapper.updateStatus(orderNo, status);
     }
+
+    @Override
+    public void updateByPrimaryKeySelective(Order order) {
+        orderMapper.updateByPrimaryKeySelective(order);
+    }
 }

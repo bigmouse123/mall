@@ -18,4 +18,6 @@ public interface IOrderService {
     Order selectById(Long orderNo);
 
     void updateStatus(Long orderNo, Integer status);
+
+    void updateByPrimaryKeySelective(Order order);
 }

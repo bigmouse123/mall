@@ -429,6 +429,7 @@
 								if (this.status == 0) {
 									html += '        <h2>已取消</h2>'
 								} else if (this.status == 1) {
+									html += '        <a class="layui-btn layui-btn-danger" style="float: right;margin: 1px 1px 0px 0px" href="/alipay/pay?orderNo=' + this.orderNo + '">支付</a>'
 									html += '        <h2>未支付</h2>'
 								} else if (this.status == 2) {
 									html += '        <h2>已支付</h2>'
