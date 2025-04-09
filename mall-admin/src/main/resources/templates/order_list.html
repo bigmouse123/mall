@@ -107,8 +107,12 @@
 									title: '状态',
 									templet: function (d) {
 										//订单状态:0-已取消-1-未付款，2-已付款，3-已发货，4-交易成功，5-交易关闭
-										var statusMap = ['已取消', '未付款', '已发货', '交易成功', '交易关闭'];
-										return statusMap[d.status] || '未知';
+										var statusMap = ['已取消', '未付款', '已付款', '已发货', '交易成功', '交易关闭'];
+										var statusText = statusMap[d.status] || '未知';
+										if (d.status === 2) { // 已付款状态显示发货按钮
+											return statusText + ' <button class="layui-btn layui-btn-xs ship-btn" data-id="' + d.orderNo + '">发货</button>';
+										}
+										return statusText;
 									}
 								},
 								// {field: 'paymentTime', title: '支付时间'},
@@ -122,6 +126,31 @@
 						]
 				, page:
 						true
+				, done: function (res, curr, count) {
+					// 绑定发货按钮点击事件
+					$('.ship-btn').on('click', function () {
+						var orderNo = $(this).data('id');
+						layer.confirm('确定要发货吗？', {icon: 3, title: '提示'}, function (index) {
+							// 修改为GET请求，带orderNo参数
+							$.post(
+									'/order/delivery ',
+									{
+										'orderNo': orderNo,
+									},
+									function (result) {
+										if (result.code === 0) {
+											mylayer.okMsg(result.msg);
+											table.reload('tableId')
+										} else {
+											mylayer.errorMsg("发货失败");
+										}
+									},
+									'json'
+							);
+							layer.close(index); // 关闭确认弹窗
+						});
+					});
+				}
 			});
 
 			// 搜索提交

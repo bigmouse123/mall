@@ -16,6 +16,9 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * @author OfferKing
  * @version 1.0
@@ -64,7 +67,10 @@ public class SpringRabbitListener {
         } else {//没有剩余延迟时间
             //4.订单超时未支付
             System.out.println("订单超时未支付");
-            orderService.updateStatus(orderNo, OrderStatusConstant.CANCEL);
+            order.setStatus(OrderStatusConstant.CANCEL);
+            order.setEndTime(new Date());
+            order.setCloseTime(new Date());
+            orderService.updateByPrimaryKeySelective(order);
         }
     }
 }

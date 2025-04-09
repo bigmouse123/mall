@@ -1,5 +1,6 @@
 package com.jiankun.mall.controller;
 
+import com.jiankun.mall.constant.OrderStatusConstant;
 import com.jiankun.mall.pojo.Order;
 import com.jiankun.mall.pojo.User;
 import com.jiankun.mall.pojo.vo.OrderVO;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,5 +38,14 @@ public class OrderController {
         User user = (User) session.getAttribute("user");
         List<OrderVO> list = orderService.list(user.getId());
         return Result.ok(list);
+    }
+
+    @RequestMapping("/receive")
+    public Result receive(Order order) {
+        order.setStatus(OrderStatusConstant.SUCCESS);
+        order.setEndTime(new Date());
+        order.setCloseTime(new Date());
+        orderService.updateByPrimaryKeySelective(order);
+        return Result.ok("收货成功");
     }
 }

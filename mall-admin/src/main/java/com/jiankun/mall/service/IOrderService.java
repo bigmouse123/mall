@@ -1,5 +1,6 @@
 package com.jiankun.mall.service;
 
+import com.jiankun.mall.pojo.Order;
 import com.jiankun.mall.pojo.OrderItem;
 import com.jiankun.mall.pojo.query.OrderQuery;
 import com.jiankun.mall.pojo.vo.OrderItemVO;
@@ -12,5 +13,7 @@ import com.jiankun.mall.util.PageResult;
  * @date 2025/3/29 17:09
  */
 public interface IOrderService {
-    public PageResult<OrderVO> selectAll(OrderQuery orderQuery);
+    PageResult<OrderVO> selectAll(OrderQuery orderQuery);
+
+    void update(Order order);
 }

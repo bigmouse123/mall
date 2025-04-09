@@ -54,9 +54,9 @@
 		<div class="content">
 			<div class="content_menu">
 				<div class="content_menu_pic">
-					<img src="/static/img/footlogo.png" class="content_menu_img"
-						 style="margin: 5px 0px;margin-right: 10px;">
-					<img src="/static/img/logoAD.gif">
+					<a href="/"><img src="/static/img/footlogo.png" class="content_menu_img"
+									 style="margin: 5px 0px;margin-right: 10px;">
+						<img src="/static/img/logoAD.gif"></a>
 				</div>
 				<div class="content_menu_ul">
 					<ul>
@@ -417,7 +417,9 @@
 			</div>
 		</div>
 		<script type="text/javascript">
-			$(function () {
+			layui.use(['layer'], function () {
+				var layer = layui.layer;
+
 				$.post(
 						'/order/list',
 						function (result) {
@@ -434,6 +436,7 @@
 								} else if (this.status == 2) {
 									html += '        <h2>已支付</h2>'
 								} else if (this.status == 3) {
+									html += '        <button class="layui-btn layui-btn-normal receive-btn" style="float: right; margin: 1px 1px 0px 0px" data-orderNo="' + this.orderNo + '">确认收货</button>';
 									html += '        <h2>已发货</h2>'
 								} else if (this.status == 4) {
 									html += '        <h2>交易成功</h2>'
@@ -458,22 +461,53 @@
 						},
 						'json'
 				);
+
+				function ChangeReg(divId, divName, Count) {
+					for (var i = 0; i <= Count; i++) {
+						document.getElementById(divName + i).style.display = "none";
+					}
+					document.getElementById(divName + divId).style.display = "block";
+					if (divId == 0) {
+						document.getElementById("regTabs_0").style.color = "#FF6A00";
+						document.getElementById("regTabs_1").style.color = "#757575";
+					}
+					if (divId == 1) {
+						document.getElementById("regTabs_0").style.color = "#757575";
+						document.getElementById("regTabs_1").style.color = "#FF6A00";
+					}
+				}
+
+				// 绑定确认收货按钮点击事件
+				$('#orderList').on('click', '.receive-btn', function () {
+					var orderNo = $(this).data('orderno'); // 获取订单号
+					console.log("orderNo=" + orderNo);
+					var $btn = $(this); // 保存按钮对象（用于后续更新）
+
+					layer.confirm('确认收到商品吗？', {icon: 3, title: '提示'}, function (index) {
+						$.post(
+								'/order/receive',
+								{'orderNo': orderNo},
+								function (result) {
+									if (result.code === 0) {
+										mylayer.okMsg(result.msg);
+										// ✅ 更新页面状态（无需刷新整个页面）
+										$btn.closest('.order_right_show')       // 找到外层订单容器
+												.find('h2').text('交易成功')       // 修改状态文本
+												.end()
+												.find('.receive-btn').remove();    // 移除按钮
+									} else {
+										mylayer.errorMsg("确认收货失败");
+									}
+								},
+								'json'
+						);
+						layer.close(index);
+					});
+				});
 			})
 
-			function ChangeReg(divId, divName, Count) {
-				for (var i = 0; i <= Count; i++) {
-					document.getElementById(divName + i).style.display = "none";
-				}
-				document.getElementById(divName + divId).style.display = "block";
-				if (divId == 0) {
-					document.getElementById("regTabs_0").style.color = "#FF6A00";
-					document.getElementById("regTabs_1").style.color = "#757575";
-				}
-				if (divId == 1) {
-					document.getElementById("regTabs_0").style.color = "#757575";
-					document.getElementById("regTabs_1").style.color = "#FF6A00";
-				}
-			}
+
 		</script>
+	</div>
 </body>
 </html>
