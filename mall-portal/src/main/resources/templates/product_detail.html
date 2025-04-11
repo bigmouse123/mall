@@ -1,325 +1,328 @@
 <!DOCTYPE html >
 <html xmlns:th="http://www.thymeleaf.org/">
 <head>
-    <title>红米6A立即购买—小米商城</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="/css/General style.css">
-    <link rel="stylesheet" href="/css/header.css">
-    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon/favicon.ico"/>
-    <link rel="stylesheet" type="text/css" href="/layui/css/layui.css">
-    <link rel="stylesheet" type="text/css" href="/css/mi.css">
-    <link rel="stylesheet" type="text/css" href="/css/shop.css">
-    <link rel="stylesheet" type="text/css" href="/css/footer1.css">
-    <link rel="stylesheet" type="text/css" href="/css/login.css">
-    <link rel="stylesheet" type="text/css" href="/font-awesome/css/font-awesome.min.css">
+	<title>红米6A立即购买—小米商城</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="/css/General style.css">
+	<link rel="stylesheet" href="/css/header.css">
+	<link rel="shortcut icon" type="image/x-icon" href="/images/favicon/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="/layui/css/layui.css">
+	<link rel="stylesheet" type="text/css" href="/css/mi.css">
+	<link rel="stylesheet" type="text/css" href="/css/shop.css">
+	<link rel="stylesheet" type="text/css" href="/css/footer1.css">
+	<link rel="stylesheet" type="text/css" href="/css/login.css">
+	<link rel="stylesheet" type="text/css" href="/font-awesome/css/font-awesome.min.css">
 </head>
 <body>
-<div th:replace="header::top"></div>
-<!--   主体内容上半部分   -->
-<div class="content-top">
-    <div class="shop_detail">
-        <div class="shop_detail_pic">
-            <div class="layui-carousel" id="test1" lay-filter="test1">
-                <div carousel-item="">
-                    <div><img id="mainImage" src="/static/img/lun/1.jpg"></div>
-                    <div><img src="/static/img/lun/2.jpg"></div>
-                    <div><img src="/static/img/lun/3.jpg"></div>
-                    <div><img src="/static/img/lun/4.jpg"></div>
-                </div>
-            </div>
-        </div>
-        <div class="shop_detail_menu" id="detailId">
-            <h1 id="name"></h1>
-            <p id="subtitle"></p>
-            <h2 id="price"></h2>
-            <div class="detail_map">
-                <i class="fa fa-map-marker " style="color:#ccc;font-size: 15px;"></i>
-                <span>北京  &nbsp;北京市   &nbsp;东城区   &nbsp;永定门外街道  <a href="" style="color:#FF6A00;">  &nbsp;修改 </a> </span><br>
-                <span style="color:#FF6A00;margin-left: 12px;">有现货</span>
-            </div>
-            <div class="shop_detail_much">
-                <p>选择版本</p>
-                <div class="detail_much_left">4GB+64GB 全网通 <span data-val="599">599元</span></div>
-                <div class="detail_much_left">6GB+64GB 全网通 <span data-val="699">699元</span></div>
+	<div th:replace="header::top"></div>
+	<!--   主体内容上半部分   -->
+	<div class="content-top">
+		<div class="shop_detail">
+			<div class="shop_detail_pic">
+				<div class="layui-carousel" id="test1" lay-filter="test1">
+					<div carousel-item="">
+						<div><img id="mainImage" src="/static/img/lun/1.jpg"></div>
+						<div><img src="/static/img/lun/2.jpg"></div>
+						<div><img src="/static/img/lun/3.jpg"></div>
+						<div><img src="/static/img/lun/4.jpg"></div>
+					</div>
+				</div>
+			</div>
+			<div class="shop_detail_menu" id="detailId">
+				<h1 id="name"></h1>
+				<p id="subtitle"></p>
+				<h2 id="price"></h2>
+				<div class="detail_map">
+					<i class="fa fa-map-marker " style="color:#ccc;font-size: 15px;"></i>
+					<span>北京  &nbsp;北京市   &nbsp;东城区   &nbsp;永定门外街道  <a href="" style="color:#FF6A00;">  &nbsp;修改 </a> </span><br>
+					<span style="color:#FF6A00;margin-left: 12px;">有现货</span>
+				</div>
+				<div class="shop_detail_much">
+					<p>选择版本</p>
+					<div class="detail_much_left">4GB+64GB 全网通 <span data-val="599">599元</span></div>
+					<div class="detail_much_left">6GB+64GB 全网通 <span data-val="699">699元</span></div>
 
-            </div>
-            <div class="clear"></div>
-            <div class="shop_detail_color">
-                <p>选择颜色</p>
-                <div class="detail_color_left detail_color_left_checked"><span style="background:#F6E6D8; "></span> 金色
-                </div>
-                <div class="detail_color_left"><span style="background:#3C3F43;"></span> 深灰</div>
-                <div class="detail_color_left"><span style="background:#D93239;"></span> 亮红</div>
-                <div class="detail_color_left"><span style="background:#3871B7;"></span> 亮蓝</div>
-            </div>
-            <div class="clear"></div>
-            <div class="shop_detail_bz">
-                <div class="shop_detail_bz0">
-                    <p>选择小米提供的保障服务</p>
-                    <a href="#">了解保障服务 ></a>
-                    <div class="clear"></div>
-                </div>
-                <div class="shop_detail_bz1" style="border-bottom: none">
-                    <span class="fa fa-check-circle shop_detail_button"></span>
-                    <img src="/static/img/bz.jpg">
-                    <div class="shop_detail_1">
-                        <p style="font-size: 18px;color: #333;">意外保障服务</p>
-                        <p>手机意外摔落/进水/碾压等损坏</p>
-                        <b class="fa fa-check-square shop_detail_button"></b> &nbsp;我已阅读&nbsp; <a> &nbsp;服务条款&nbsp; </a>|<a>
-                        &nbsp;服务条款&nbsp;</a>
-                        <span data-val="99">99元</span>
-                    </div>
-                </div>
-                <div class="shop_detail_bz1">
-                    <span class="fa fa-check-circle shop_detail_button"></span>
-                    <img src="/static/img/bz.jpg">
-                    <div class="shop_detail_1">
-                        <p style="font-size: 18px;color: #333;">碎屏保障服务</p>
-                        <p>手机意外碎屏</p>
-                        <b class="fa fa-check-square shop_detail_button"></b> &nbsp;我已阅读&nbsp; <a> &nbsp;服务条款&nbsp; </a>|<a>
-                        &nbsp;服务条款&nbsp;</a>
-                        <span data-val="179">179元</span>
-                    </div>
-                </div>
-            </div>
-            <div class="shop_detail_zj">
-                <div>
-                    <p>小米8 6GB+64GB 黑色</p><span id="phonePrice">699元</span>
-                    <div class="clear"></div>
-                </div>
-                <p id="totalPrice" style="color:#FF6A00;font-size: 25px;margin-left: 30px;">总计&nbsp;：&nbsp;699元</p>
-            </div>
-            <div class="shop_detail_cart" id="addCart">加入购物车</div>
-            <p><i class="fa fa-check-circle-o"></i> 7天无理由退货 <i class="fa fa-check-circle-o"></i> 15天质量问题换货
-                <i class="fa fa-check-circle-o"></i> 365天保修 </p>
-        </div>
-        <div class="clear"></div>
-    </div>
-    <div class="detail_content">
-        <div class="detail_content_1">
-            <p>特别说明</p>
-            <!--            <img src="/static/img/sm.jpg">-->
-            <div id="detail"></div>
-            <p>官方微信</p>
-            <img src="/static/img/2.jpg">
-        </div>
-    </div>
-    <!--   网页底部   -->
-    <div class="footer-top">
-        <div class="footer-top_li">
-            <div class="footer-top_li_1">
-                <a href="#"><i class="fa fa-wrench"></i>预约维修服务</a><span></span>
-                <a href="#"><i class="fa fa-rotate-right "></i>7天无理由退货</a><span></span>
-                <a href="#"><i class="fa fa-refresh"></i>15天免费换货</a><span></span>
-                <a href="#"><i class="fa fa-gift"></i>满150元包邮</a><span></span>
-                <a href="#"><i class="fa fa-map-marker"></i>520余家售后网点</a>
-            </div>
-            <span class="separate"></span>
-            <div class="footer-top_li_2">
-                <div class="footer-top_li_a">
-                    <dl>
-                        <dt>帮助中心</dt>
-                        <dd><a href="">账户管理</a></dd>
-                        <dd><a href="">购物指南</a></dd>
-                        <dd><a href="">订单操作</a></dd>
-                    </dl>
-                    <dl>
-                        <dt>服务支持</dt>
-                        <dd><a href="">售后政策</a></dd>
-                        <dd><a href="">自助服务</a></dd>
-                        <dd><a href="">相关下载</a></dd>
-                    </dl>
-                    <dl>
-                        <dt>线下门店</dt>
-                        <dd><a href="">小米之家</a></dd>
-                        <dd><a href="">服务网点</a></dd>
-                        <dd><a href="">授权体验店</a></dd>
-                    </dl>
-                    <dl>
-                        <dt>关于小米</dt>
-                        <dd><a href="">了解小米</a></dd>
-                        <dd><a href="">加入小米</a></dd>
-                        <dd><a href="">投资者关系</a></dd>
-                    </dl>
-                    <dl>
-                        <dt>关注我们</dt>
-                        <dd><a href="">新浪微博</a></dd>
-                        <dd><a href="">官网微博</a></dd>
-                        <dd><a href="">联系我们</a></dd>
-                    </dl>
-                    <dl>
-                        <dt>特色服务</dt>
-                        <dd><a href="">F码通道</a></dd>
-                        <dd><a href="">礼物码</a></dd>
-                        <dd><a href="">防伪查询</a></dd>
-                    </dl>
-                    <div class="connect">
-                        <p class="telephone">Feir-520-1314</p>
-                        <p class="time">周一至周日 8:00-18:00<br>(仅收市话费)</p>
-                        <button><span class="fa fa-commenting "></span> 联系客服</button>
-                    </div>
-                </div>
-                <div class="footer-top_li_b"></div>
-            </div>
-        </div>
+				</div>
+				<div class="clear"></div>
+				<div class="shop_detail_color">
+					<p>选择颜色</p>
+					<div class="detail_color_left detail_color_left_checked"><span style="background:#F6E6D8; "></span>
+						金色
+					</div>
+					<div class="detail_color_left"><span style="background:#3C3F43;"></span> 深灰</div>
+					<div class="detail_color_left"><span style="background:#D93239;"></span> 亮红</div>
+					<div class="detail_color_left"><span style="background:#3871B7;"></span> 亮蓝</div>
+				</div>
+				<div class="clear"></div>
+				<div class="shop_detail_bz">
+					<div class="shop_detail_bz0">
+						<p>选择小米提供的保障服务</p>
+						<a href="#">了解保障服务 ></a>
+						<div class="clear"></div>
+					</div>
+					<div class="shop_detail_bz1" style="border-bottom: none">
+						<span class="fa fa-check-circle shop_detail_button"></span>
+						<img src="/static/img/bz.jpg">
+						<div class="shop_detail_1">
+							<p style="font-size: 18px;color: #333;">意外保障服务</p>
+							<p>手机意外摔落/进水/碾压等损坏</p>
+							<b class="fa fa-check-square shop_detail_button"></b> &nbsp;我已阅读&nbsp; <a> &nbsp;服务条款&nbsp; </a>|<a>
+							&nbsp;服务条款&nbsp;</a>
+							<span data-val="99">99元</span>
+						</div>
+					</div>
+					<div class="shop_detail_bz1">
+						<span class="fa fa-check-circle shop_detail_button"></span>
+						<img src="/static/img/bz.jpg">
+						<div class="shop_detail_1">
+							<p style="font-size: 18px;color: #333;">碎屏保障服务</p>
+							<p>手机意外碎屏</p>
+							<b class="fa fa-check-square shop_detail_button"></b> &nbsp;我已阅读&nbsp; <a> &nbsp;服务条款&nbsp; </a>|<a>
+							&nbsp;服务条款&nbsp;</a>
+							<span data-val="179">179元</span>
+						</div>
+					</div>
+				</div>
+				<div class="shop_detail_zj">
+					<div>
+						<p>小米8 6GB+64GB 黑色</p><span id="price1"></span>
+						<div class="clear"></div>
+					</div>
+					<p id="totalPrice" style="color:#FF6A00;font-size: 25px;margin-left: 30px;"></p>
+				</div>
+				<div class="shop_detail_cart" id="addCart">加入购物车</div>
+				<p><i class="fa fa-check-circle-o"></i> 7天无理由退货 <i class="fa fa-check-circle-o"></i> 15天质量问题换货
+					<i class="fa fa-check-circle-o"></i> 365天保修 </p>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="detail_content">
+			<div class="detail_content_1">
+				<p>特别说明</p>
+				<!--            <img src="/static/img/sm.jpg">-->
+				<div id="detail"></div>
+				<p>官方微信</p>
+				<img src="/static/img/2.jpg">
+			</div>
+		</div>
+		<!--   网页底部   -->
+		<div class="footer-top">
+			<div class="footer-top_li">
+				<div class="footer-top_li_1">
+					<a href="#"><i class="fa fa-wrench"></i>预约维修服务</a><span></span>
+					<a href="#"><i class="fa fa-rotate-right "></i>7天无理由退货</a><span></span>
+					<a href="#"><i class="fa fa-refresh"></i>15天免费换货</a><span></span>
+					<a href="#"><i class="fa fa-gift"></i>满150元包邮</a><span></span>
+					<a href="#"><i class="fa fa-map-marker"></i>520余家售后网点</a>
+				</div>
+				<span class="separate"></span>
+				<div class="footer-top_li_2">
+					<div class="footer-top_li_a">
+						<dl>
+							<dt>帮助中心</dt>
+							<dd><a href="">账户管理</a></dd>
+							<dd><a href="">购物指南</a></dd>
+							<dd><a href="">订单操作</a></dd>
+						</dl>
+						<dl>
+							<dt>服务支持</dt>
+							<dd><a href="">售后政策</a></dd>
+							<dd><a href="">自助服务</a></dd>
+							<dd><a href="">相关下载</a></dd>
+						</dl>
+						<dl>
+							<dt>线下门店</dt>
+							<dd><a href="">小米之家</a></dd>
+							<dd><a href="">服务网点</a></dd>
+							<dd><a href="">授权体验店</a></dd>
+						</dl>
+						<dl>
+							<dt>关于小米</dt>
+							<dd><a href="">了解小米</a></dd>
+							<dd><a href="">加入小米</a></dd>
+							<dd><a href="">投资者关系</a></dd>
+						</dl>
+						<dl>
+							<dt>关注我们</dt>
+							<dd><a href="">新浪微博</a></dd>
+							<dd><a href="">官网微博</a></dd>
+							<dd><a href="">联系我们</a></dd>
+						</dl>
+						<dl>
+							<dt>特色服务</dt>
+							<dd><a href="">F码通道</a></dd>
+							<dd><a href="">礼物码</a></dd>
+							<dd><a href="">防伪查询</a></dd>
+						</dl>
+						<div class="connect">
+							<p class="telephone">Feir-520-1314</p>
+							<p class="time">周一至周日 8:00-18:00<br>(仅收市话费)</p>
+							<button><span class="fa fa-commenting "></span> 联系客服</button>
+						</div>
+					</div>
+					<div class="footer-top_li_b"></div>
+				</div>
+			</div>
 
-    </div>
-    <div class="footer-bottom">
-        <div class="footer-bottom_li">
-            <div class="footer-bottom_li_1">
-                <img src="/static/img/footlogo.png" alt="" class="logoBottom">
-            </div>
-            <div class="footer-bottom_li_2">
-                <div class="footer-bottom_li_a">
-                    <ul>
-                        <li>小米商城<span></span></li>
-                        <li>MIUI<span></span></li>
-                        <li>米家<span></span></li>
-                        <li>米聊<span></span></li>
-                        <li>多看<span></span></li>
-                        <li>游戏<span></span></li>
-                        <li>路由器<span></span></li>
-                        <li>米粉卡<span></span></li>
-                        <li>政企服务<span></span></li>
-                        <li>小米天猫店<span></span></li>
-                        <li>隐私政策<span></span></li>
-                        <li>问题反馈<span></span></li>
-                        <li>Select Region</li>
-                    </ul>
-                </div>
-                <div class="footer-bottom_li_b">
-                    <a href="">©mi.com</a>
-                    京ICP证110507号
-                    <a href="">京ICP备10046444号</a>
-                    <a href="">京公网安备11010802020134号</a>
-                    <a href="">京网文[2014]0059-0009号</a>
-                    <br>
-                    违法和不良信息举报电话：185-0130-1238，本网站所列数据，除特殊说明，所有数据均出自我司实验室测试
-                </div>
-            </div>
-            <div class="footer-bottom_li_3">
-                <img src="/static/img/footericon1.png" alt="" class="icon">
-                <img src="/static/img/footericon2.png" alt="" class="icon">
-                <img src="/static/img/footericon3.png" alt="" class="icon">
-                <img src="/static/img/footericon4.png" alt="" class="icon">
-                <img src="/static/img/footericon5.png" alt="" class="icon">
-            </div>
-            <div class="footer-bottom_li_4">
-                探索黑科技，小米为发烧而生！
-            </div>
-        </div>
-    </div>
-</div>
-<div id="loginFrom" class="login_card" style="display: none">
-    <form class="layui-form" action="">
-        <!-- 账号 -->
-        <div class="user_box">
-            <div class="user">
-                <input type="text" name="name" class="username">
-            </div>
-            <div class="user_msg">请输入账号</div>
-        </div>
-        <!-- 密码 -->
-        <div class="user_box">
-            <div class="user">
-                <input type="password" name="password" class="password">
-            </div>
-            <div class="user_msg">请输入密码</div>
-        </div>
-        <!-- 登录按钮 -->
-        <button type="button" class="login_btn" lay-submit lay-filter="submitLogin">登录</button>
-        <!-- 登录说明 -->
-        <div class="login_other">
-            <a href="#" class="l_l">忘记密码？</a>
-            <a href="#" class="l_right">手机号登录</a>
-        </div>
-    </form>
-</div>
-<script src="/js/jq_3.3.1_mi.js"></script>
-<script type="text/javascript" src="/layui/layui.js"></script>
-<script src="/js/detail.js"></script>
-<script src="/mylayer.js"></script>
-<script src="/js/index.js"></script>
-<script>
-    layui.use(['carousel', 'form', 'layer'], function () {
-        var carousel = layui.carousel;
-        var form = layui.form;
-        var layer = layui.layer;
-        //建造实例
-        carousel.render({
-            elem: '#test1'
-            , width: '560px' //设置容器宽度
-            , height: '560px'
-            , arrow: 'always' //始终显示箭头
-            //,anim: 'updown' //切换动画方式
-        });
+		</div>
+		<div class="footer-bottom">
+			<div class="footer-bottom_li">
+				<div class="footer-bottom_li_1">
+					<img src="/static/img/footlogo.png" alt="" class="logoBottom">
+				</div>
+				<div class="footer-bottom_li_2">
+					<div class="footer-bottom_li_a">
+						<ul>
+							<li>小米商城<span></span></li>
+							<li>MIUI<span></span></li>
+							<li>米家<span></span></li>
+							<li>米聊<span></span></li>
+							<li>多看<span></span></li>
+							<li>游戏<span></span></li>
+							<li>路由器<span></span></li>
+							<li>米粉卡<span></span></li>
+							<li>政企服务<span></span></li>
+							<li>小米天猫店<span></span></li>
+							<li>隐私政策<span></span></li>
+							<li>问题反馈<span></span></li>
+							<li>Select Region</li>
+						</ul>
+					</div>
+					<div class="footer-bottom_li_b">
+						<a href="">©mi.com</a>
+						京ICP证110507号
+						<a href="">京ICP备10046444号</a>
+						<a href="">京公网安备11010802020134号</a>
+						<a href="">京网文[2014]0059-0009号</a>
+						<br>
+						违法和不良信息举报电话：185-0130-1238，本网站所列数据，除特殊说明，所有数据均出自我司实验室测试
+					</div>
+				</div>
+				<div class="footer-bottom_li_3">
+					<img src="/static/img/footericon1.png" alt="" class="icon">
+					<img src="/static/img/footericon2.png" alt="" class="icon">
+					<img src="/static/img/footericon3.png" alt="" class="icon">
+					<img src="/static/img/footericon4.png" alt="" class="icon">
+					<img src="/static/img/footericon5.png" alt="" class="icon">
+				</div>
+				<div class="footer-bottom_li_4">
+					探索黑科技，小米为发烧而生！
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="loginFrom" class="login_card" style="display: none">
+		<form class="layui-form" action="">
+			<!-- 账号 -->
+			<div class="user_box">
+				<div class="user">
+					<input type="text" name="name" class="username">
+				</div>
+				<div class="user_msg">请输入账号</div>
+			</div>
+			<!-- 密码 -->
+			<div class="user_box">
+				<div class="user">
+					<input type="password" name="password" class="password">
+				</div>
+				<div class="user_msg">请输入密码</div>
+			</div>
+			<!-- 登录按钮 -->
+			<button type="button" class="login_btn" lay-submit lay-filter="submitLogin">登录</button>
+			<!-- 登录说明 -->
+			<div class="login_other">
+				<a href="#" class="l_l">忘记密码？</a>
+				<a href="#" class="l_right">手机号登录</a>
+			</div>
+		</form>
+	</div>
+	<script src="/js/jq_3.3.1_mi.js"></script>
+	<script type="text/javascript" src="/layui/layui.js"></script>
+	<script src="/js/detail.js"></script>
+	<script src="/mylayer.js"></script>
+	<script src="/js/index.js"></script>
+	<script>
+		layui.use(['carousel', 'form', 'layer'], function () {
+			var carousel = layui.carousel;
+			var form = layui.form;
+			var layer = layui.layer;
+			//建造实例
+			carousel.render({
+				elem: '#test1'
+				, width: '560px' //设置容器宽度
+				, height: '560px'
+				, arrow: 'always' //始终显示箭头
+				//,anim: 'updown' //切换动画方式
+			});
 
-        var queryString = window.location.search;
-        var urlParams = new URLSearchParams(queryString);
-        var id = urlParams.get("id");
+			var queryString = window.location.search;
+			var urlParams = new URLSearchParams(queryString);
+			var id = urlParams.get("id");
 
-        var quantity = 1;
+			var quantity = 1;
 
-        $.post(
-            '/product/selectById',
-            {'id': id},
-            function (result) {
-                console.log(result);
-                var product = result.data;
-                $('#name').text(product.name);
-                $('#subtitle').text(product.subtitle);
-                $('#price').text(product.price);
-                $('#mainImage').attr('src', product.mainImage);
-                $('#detail').html(product.detail);
-            },
-            'json'
-        );
+			$.post(
+					'/product/selectById',
+					{'id': id},
+					function (result) {
+						console.log(result);
+						var product = result.data;
+						$('#name').text(product.name);
+						$('#subtitle').text(product.subtitle);
+						$('#price').text(product.price + "元");
+						$('#price1').text(product.price + "元")
+						$('#totalPrice').text("总计：" + product.price + "元")
+						$('#mainImage').attr('src', product.mainImage);
+						$('#detail').html(product.detail);
+					},
+					'json'
+			);
 
-        function addCart() {
-            $.post(
-                '/cart/add',
-                {
-                    'productId': id,
-                    'quantity': quantity
-                },
-                function (result) {
-                    if (result.code == 0) {
-                        mylayer.okUrl(result.msg, '/page/cart/list')
-                    } else if (result.code == 2) {
-                        layer.open({
-                            type: 1,
-                            title: "登录",
-                            area: ["50%", "50%"],
-                            content: $('#loginFrom')
-                        })
-                    } else {
-                        mylayer.errorMsg(result.msg)
-                    }
-                },
-                'json'
-            );
-        }
+			function addCart() {
+				$.post(
+						'/cart/add',
+						{
+							'productId': id,
+							'quantity': quantity
+						},
+						function (result) {
+							if (result.code == 0) {
+								mylayer.okUrl(result.msg, '/page/cart/list')
+							} else if (result.code == 2) {
+								layer.open({
+									type: 1,
+									title: "登录",
+									area: ["50%", "50%"],
+									content: $('#loginFrom')
+								})
+							} else {
+								mylayer.errorMsg(result.msg)
+							}
+						},
+						'json'
+				);
+			}
 
-        $('#addCart').click(function () {
-            addCart();
-        })
+			$('#addCart').click(function () {
+				addCart();
+			})
 
-        form.on('submit(submitLogin)', function (data) {
-            var field = data.field;
-            $.post(
-                '/user/login',
-                field,
-                function (result) {
-                    if (result.code == 0) {
-                        addCart();
-                    } else {
-                        mylayer.errorMsg(result.msg);
-                    }
-                },
-                'json'
-            );
-        });
-    });
-</script>
+			form.on('submit(submitLogin)', function (data) {
+				var field = data.field;
+				$.post(
+						'/user/login',
+						field,
+						function (result) {
+							if (result.code == 0) {
+								addCart();
+							} else {
+								mylayer.errorMsg(result.msg);
+							}
+						},
+						'json'
+				);
+			});
+		});
+	</script>
 </body>
 </html>

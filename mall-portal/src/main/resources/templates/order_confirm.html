@@ -61,7 +61,7 @@
 			<h2>配送方式 <span style="color: #FF6A00;font-size: 13px;margin-left: 80px;">包邮</span></h2>
 			<div class="close_data">
 				<h3>付款方式</h3>
-				<h5 id="0" style="border-color:rgb(255,106,0)">货到付款</h5>
+				<h5 id="0">货到付款</h5>
 				<h5 id="1">微信</h5>
 				<h5 id="2">支付宝</h5>
 				<h5 id="3">银联</h5>
@@ -83,7 +83,7 @@
 					<p><i class="fa fa-plus-square"></i>使用优惠券</p>
 					<p><i class="fa fa-plus-square"></i>使用小米礼品卡</p>
 				</div>
-				<div class="close_much_right">
+				<!--<div class="close_much_right">
 					<p>商品件数 :<span>3件</span></p>
 					<p>商品总价 :<span>4999元</span></p>
 					<p>优惠活动 :<span>-0元</span></p>
@@ -91,7 +91,7 @@
 					<p>运费 :<span>0元</span></p>
 					<p style="height: 50px;line-height:50px; ">应付总额 :<span class="zong">4999 <b> 元</b></span></p>
 				</div>
-				<div class="clear"></div>
+				<div class="clear"></div>-->
 			</div>
 		</div>
 		<div class="close_clear">
@@ -240,29 +240,54 @@
 					function (result) {
 						console.log(result);
 						if (result.code == 0) {
-							var html = '';
+							var html1 = '';
+							var html2 = '';
 							$(result.data).each(function () {
-								html += '<p>';
-								html += '    <img width="30px" height="30px" src="' + this.productMainImage + '"><a href="/page/product/detail?id="' + this.productId + '>' + this.productName + '</a>' + this.productPrice + '';
-								html += '        x ' + this.quantity + '';
-								html += '        <span>' + (this.productPrice * this.quantity) + '</span>';
-								html += '</p>';
+								html1 += '<p>';
+								html1 += '    <img width="30px" height="30px" src="' + this.productMainImage + '"><a href="/page/product/detail?id="' + this.productId + '>' + this.productName + '</a>' + this.productPrice + '';
+								html1 += '        x ' + this.quantity + '';
+								html1 += '        <span>' + (this.productPrice * this.quantity) + '</span>';
+								html1 += '</p>';
+								html2 += '<div class="close_much_right">';
+								html2 += '	<p>商品件数 :<span>' + this.quantity + '件</span></p>';
+								html2 += '	<p>商品总价 :<span>' + this.productPrice * this.quantity + '元</span></p>';
+								html2 += '	<p>优惠活动 :<span>-0元</span></p>';
+								html2 += '	<p>优惠券抵扣 :<span>-0元</span></p>';
+								html2 += '	<p>运费 :<span>0元</span></p>';
+								html2 += '	<p style="height: 50px;line-height:50px; ">应付总额 :<span';
+								html2 += '			class="zong">' + this.productPrice * this.quantity + ' <b> 元</b></span></p>';
+								html2 += '</div>';
 							});
-							html += '<div class = "clear" ></div>';
-							$('#cartList').append(html);
+							html1 += '<div class = "clear" ></div>';
+							html2 += '<div class="clear"></div>';
+							$('#cartList').append(html1);
+							$('.close_much').append(html2);
 						}
 					},
 					'json'
 			);
 
+
 			$('.submit-cart').click(function () {
-				console.log($('.close_add[checked = "checked"]').attr('id'));
-				console.log($('.close_data h5[checked = "checked"]').attr('id'));
+				var shippingId = $('.close_add[checked = "checked"]').attr('id');
+				var paymentType = $('.close_data h5[checked = "checked"]').attr('id');
+				console.log(shippingId);
+				console.log(paymentType);
+
+				if (!shippingId) {
+					mylayer.errorMsg('请选择收货地址');
+					return false;
+				}
+				if (!paymentType) {
+					mylayer.errorMsg('请选择付款方式');
+					return false;
+				}
+
 				$.post(
 						'/order/add',
 						{
-							'shippingId': $('.close_add[checked = "checked"]').attr('id'),
-							'paymentType': $('.close_data h5[checked = "checked"]').attr('id'),
+							'shippingId': shippingId,
+							'paymentType': paymentType,
 						},
 						function (result) {
 							console.log(result);
