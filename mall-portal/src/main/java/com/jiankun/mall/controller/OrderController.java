@@ -48,4 +48,11 @@ public class OrderController {
         orderService.updateByPrimaryKeySelective(order);
         return Result.ok("收货成功");
     }
+
+    @RequestMapping("/delete")
+    public Result delete(Order order) {
+        order.setIsDeleted((byte) 1);
+        orderService.updateByPrimaryKeySelective(order);
+        return Result.ok("删除订单成功");
+    }
 }

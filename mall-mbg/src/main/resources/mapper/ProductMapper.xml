@@ -248,10 +248,18 @@
     </update>
 
     <select id="count" resultType="com.jiankun.mall.pojo.vo.CategoryCountVO">
-        select c.name as name, count(*) as value
-        from product as p inner join category as c
-        on p.category_id = c.id
-        group by p.category_id
+        --         select c.name as name, count(*) as value
+--         from product as p inner join category as c
+--         on p.category_id = c.id
+--         group by p.category_id
+        SELECT parent_c.name AS name, COUNT(*) AS value
+        FROM product AS p
+            INNER JOIN category AS c
+        ON p.category_id = c.id
+            INNER JOIN category AS parent_c ON c.parent_id = parent_c.id
+        WHERE parent_c.parent_id = 0
+        GROUP BY parent_c.id;
+
     </select>
 
     <select id="getAllPrice" resultType="com.jiankun.mall.pojo.vo.ProductPriceVO">

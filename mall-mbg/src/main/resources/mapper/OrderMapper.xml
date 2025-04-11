@@ -227,6 +227,7 @@
                  INNER JOIN order_item AS oi
                             ON o.order_no = oi.order_no
         WHERE o.user_id = #{userId}
+          AND o.is_deleted = 0
         ORDER BY create_time DESC
     </select>
     <select id="selectAll" resultType="com.jiankun.mall.pojo.vo.OrderVO">

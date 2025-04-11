@@ -429,6 +429,7 @@
 								html += '<div class="order_right_show" id="register_0" style="display:block">';
 								html += '    <div class="order_right_content">';
 								if (this.status == 0) {
+									html += '        <button class="layui-btn layui-btn-normal delete-btn" style="float: right; margin: 1px 1px 0px 0px" data-orderNo="' + this.orderNo + '">删除订单</button>';
 									html += '        <h2>已取消</h2>'
 								} else if (this.status == 1) {
 									html += '        <a class="layui-btn layui-btn-danger" style="float: right;margin: 1px 1px 0px 0px" href="/alipay/pay?orderNo=' + this.orderNo + '">支付</a>'
@@ -439,6 +440,7 @@
 									html += '        <button class="layui-btn layui-btn-normal receive-btn" style="float: right; margin: 1px 1px 0px 0px" data-orderNo="' + this.orderNo + '">确认收货</button>';
 									html += '        <h2>已发货</h2>'
 								} else if (this.status == 4) {
+									html += '        <button class="layui-btn layui-btn-normal delete-btn" style="float: right; margin: 1px 1px 0px 0px" data-orderNo="' + this.orderNo + '">删除订单</button>';
 									html += '        <h2>交易成功</h2>'
 								}
 								html += '        <p>' + this.createTime + ' | XXX | 订单号： ' + this.orderNo + ' |' + this.paymentType + ' <span>订单金额：<b> ' + this.payment + '</b> 元 </span>';
@@ -504,9 +506,33 @@
 						layer.close(index);
 					});
 				});
+
+				// 删除订单绑定事件
+				$('#orderList').on('click', '.delete-btn', function () {
+					$('#orderList').on('click', '.delete-btn', function () {
+						var orderNo = $(this).data('orderno');
+						var $orderBlock = $(this).closest('.order_right_show'); // 获取订单容器
+
+						layer.confirm('确定要删除此订单吗？', {icon: 3, title: '提示'}, function (index) {
+							$.post(
+									'/order/delete',
+									{orderNo: orderNo},
+									function (result) {
+										if (result.code === 0) {
+											mylayer.okMsg(result.msg);
+											// ✅ 删除成功时移除订单块
+											$orderBlock.remove();
+										} else {
+											mylayer.errorMsg("删除失败：" + (result.msg || '未知错误'));
+										}
+									},
+									'json'
+							);
+							layer.close(index);
+						});
+					});
+				});
 			})
-
-
 		</script>
 	</div>
 </body>
