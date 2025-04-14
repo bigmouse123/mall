@@ -1,8 +1,53 @@
 layui.use(['layer'], function () {
     var layer = layui.layer;
 
-    //初始化总价, 总选择数, 总条数;
-    doPrice();
+    $.post(
+        '/cart/list',
+        function (result) {
+            console.log(result.data);
+            var html = '';
+            $(result.data).each(function () {
+                html += '<div id="' + this.id + '" class="list list-item">';
+                if (this.checked) {
+                    html += '    <div class="select"><i class="fa fa-check checked"></i></div>';
+                } else {
+                    html += '    <div class="select"><i class="fa fa-check"></i></div>';
+                }
+                html += '    <div class="good-img"><img src="' + this.productMainImage + '" alt=""/></div>';
+                html += '    <div class="good-name">' + this.productName + '</div>';
+                html += '    <div class="good-price">' + this.productPrice + '</div>';
+                html += '    <div class="good-num">';
+                html += '        <div class="num-input">';
+                html += '            <button class="minus">-</button>';
+                html += '            <input type="text" value="' + this.quantity + '" class="num-value"/>';
+                html += '            <button class="plus">+</button>';
+                html += '        </div>';
+                html += '    </div>';
+                html += '    <div class="good-total-price">' + eval(this.quantity * this.productPrice) + '</div>';
+                html += '    <div class="operation"><i class="fa fa-times"></i></div>';
+                html += '</div>';
+            });
+            html += '<div class="list list-total">';
+            html += '    <div class="list-total-left">';
+            html += '        <span class="notice"><a href="">继续购物</a></span>';
+            html += '        <span class="statistics">共 <span class="all-count">0</span> 件商品，已选择 <span';
+            html += '            class="select-count">0</span> 件</span>';
+            html += '    </div>';
+            html += '    <div class="list-total-right">';
+            html += '        <div class="total-price">合计: <span class="sum-price">0</span> 元</div>';
+            html += '        <a href="/page/order/confirm">';
+            html += '            <button class="submit-cart">去结算</button>';
+            html += '        </a>';
+            html += '    </div>';
+            html += '</div>';
+            $('#cartId').append(html);
+            //初始化总价, 总选择数, 总条数;
+            doPrice();
+            doCheckAll();
+        },
+        'json'
+    );
+
     //全选/选择框的鼠标移上变个颜色
     $('.fa-check').mouseover(function () {
         if ($(this).attr('class') != 'fa fa-check checked') {
